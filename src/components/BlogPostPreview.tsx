@@ -50,7 +50,7 @@ export const BlogPostsPreview: FunctionComponent<{
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-16 lg:gap-28 md:grid-cols-2 md:my-16 my-8",
+        "grid grid-cols-1 gap-16 lg:gap-22 md:grid-cols-3 md:my-16 my-8",
         className
       )}
     >

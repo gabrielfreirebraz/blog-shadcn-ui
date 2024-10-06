@@ -14,10 +14,22 @@ export const Footer: FunctionComponent = () => {
           © {config.blog.copyright} {new Date().getFullYear()}
         </div>
         <div className="text-xs text-muted-foreground hidden lg:block">
-          <Link
-            href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.baseUrl}`}
+          {/* <Link
+            href={`/termos-uso`}
           >
-            Blog powered by wisp
+            Termos
+          </Link>
+          &nbsp;•&nbsp; */}
+          <Link
+            href={`/privacidade`}
+          >
+            Política de privacidade
+          </Link>
+          &nbsp;•&nbsp;
+          <Link
+            href={`${config.baseUrl}`}
+          >
+            Blog powered by elevium
           </Link>
         </div>
         <div>
@@ -30,10 +42,22 @@ export const Footer: FunctionComponent = () => {
         </div>
       </div>
       <div className="text-xs text-muted-foreground lg:hidden">
-        <Link
-          href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.baseUrl}`}
+        {/* <Link
+          href={`/termos-uso`}
         >
-          Blog powered by wisp
+          Termos
+        </Link>
+        &nbsp;•&nbsp; */}
+        <Link
+          href={`/privacidade`}
+        >
+          Privacidade
+        </Link>
+        &nbsp;•&nbsp;
+        <Link
+          href={`${config.baseUrl}`}
+        >
+          Blog powered by elevium
         </Link>
       </div>
     </section>
