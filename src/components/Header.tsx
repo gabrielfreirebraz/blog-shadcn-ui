@@ -19,7 +19,7 @@ interface MenuItem {
 }
 const menuItems: MenuItem[] = [
   { name: "Blog", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "Sobre", href: "/sobre" },
 ];
 export const Navigation: FunctionComponent = () => {
   const pathname = usePathname();
@@ -77,7 +77,8 @@ export const Header: FunctionComponent = () => {
     <section className="flex items-center justify-between mt-8 md:mt-16 mb-12">
       <Link href="/">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-          {config.blog.name}
+          {/* {config.blog.name} */}
+          <img src={`/images/bolsoextra.png`} height={120} width={200} />
         </h1>
       </Link>
       <Navigation />

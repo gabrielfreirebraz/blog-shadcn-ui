@@ -14,22 +14,17 @@ export const Footer: FunctionComponent = () => {
           © {config.blog.copyright} {new Date().getFullYear()}
         </div>
         <div className="text-xs text-muted-foreground hidden lg:block">
-          {/* <Link
-            href={`/termos-uso`}
-          >
-            Termos
-          </Link>
-          &nbsp;•&nbsp; */}
           <Link
             href={`/privacidade`}
           >
-            Política de privacidade
+            Política de Privacidade
           </Link>
           &nbsp;•&nbsp;
           <Link
-            href={`${config.baseUrl}`}
+            target="_blank"
+            href={`https://www.elevium.io`}
           >
-            Blog powered by elevium
+            Blog desenvolvido por <strong>elevium</strong>
           </Link>
         </div>
         <div>
@@ -42,22 +37,17 @@ export const Footer: FunctionComponent = () => {
         </div>
       </div>
       <div className="text-xs text-muted-foreground lg:hidden">
-        {/* <Link
-          href={`/termos-uso`}
-        >
-          Termos
-        </Link>
-        &nbsp;•&nbsp; */}
         <Link
           href={`/privacidade`}
         >
-          Privacidade
+          Política de Privacidade
         </Link>
         &nbsp;•&nbsp;
         <Link
-          href={`${config.baseUrl}`}
+          target="_blank"
+          href={`https://www.elevium.io`}
         >
-          Blog powered by elevium
+          Blog desenvolvido por <strong>elevium</strong>
         </Link>
       </div>
     </section>
