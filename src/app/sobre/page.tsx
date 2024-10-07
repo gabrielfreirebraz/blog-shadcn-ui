@@ -14,7 +14,7 @@ O objetivo deste blog é dividir minhas experiências e aprendizados na minha jo
 
 A minha visão com este blog é criar um espaço onde possamos discutir e compartilhar ideias sobre como podemos melhorar nossa relação com o dinheiro, sempre de forma leve e sem complicações. Se você está buscando inspiração para sua própria jornada financeira, está no lugar certo!
 
-![Bruna](http://localhost:3000/images/bruna.png)
+![Bruna](https://www.bolsoextra.com.br/images/bruna.png)
 
 #### *Importante lembrar que o conteúdo deste blog reflete apenas minhas opiniões pessoais e não constitui recomendações financeiras ou de investimento. Sempre recomendo que você busque orientação de um especialista financeiro antes de tomar qualquer decisão relacionada a investimentos ou finanças.*
 `
