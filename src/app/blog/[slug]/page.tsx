@@ -1,4 +1,8 @@
 import { BlogPostContent } from "@/components/BlogPostContent";
+// import { AdsSlot } from "@/components/features/ads/ui/ads-slot";
+// import { GPTScript } from "@/components/features/ads/ui/gpt-script";
+// import { MobileAdSlot } from "@/components/features/ads/ui/mobile-ad-slot";
+// import { AdsHeader } from "@/components/ui/ads-header";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { RelatedPosts } from "@/components/RelatedPosts";
@@ -63,6 +67,9 @@ const Page = async ({ params: { slug } }: { params: Params }) => {
 
   return (
     <>
+      {/* <GPTScript /> */}
+      {/* <AdsHeader className='px-0 md:px-4 lg:px-0 mb-4' /> */}
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -73,6 +80,12 @@ const Page = async ({ params: { slug } }: { params: Params }) => {
         <RelatedPosts posts={posts} />
         <Footer />
       </div>
+
+      {/* <div className='hidden lg:flex w-[300px] h-[800px] justify-center text-[8px]'>
+        <AdsSlot id='INTERNA-LATERAL' />
+      </div> */}
+
+      {/* <MobileAdSlot id='MOBILE' /> */}
     </>
   );
 };
