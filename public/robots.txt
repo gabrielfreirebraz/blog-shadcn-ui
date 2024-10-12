@@ -3,4 +3,5 @@ Disallow: /admin/
 Allow: /
 
 Sitemap: https://bolsoextra.com.br/sitemap.xml
+Sitemap: https://bolsoextra.com.br/static/sitemap.xml
 Sitemap: https://bolsoextra.com.br/blog/sitemap
