@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://bolsoextra.com.br/sitemap.xml
+Sitemap: https://bolsoextra.com.br/blog/sitemap
