@@ -9,6 +9,7 @@ import {
 import { config } from "@/config";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FunctionComponent } from "react";
@@ -20,6 +21,7 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { name: "Blog", href: "/" },
   { name: "Sobre", href: "/sobre" },
+  { name: "Contato", href: "/contato" },
 ];
 export const Navigation: FunctionComponent = () => {
   const pathname = usePathname();
@@ -77,8 +79,7 @@ export const Header: FunctionComponent = () => {
     <section className="flex items-center justify-between mt-8 md:mt-16 mb-12">
       <Link href="/">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-          {/* {config.blog.name} */}
-          <img src={`/images/bolsoextra.png`} height={120} width={200} />
+          <Image alt={`Logo Bolso Extra`} src={`/images/bolsoextra.png`} height={120} width={200} />
         </h1>
       </Link>
       <Navigation />

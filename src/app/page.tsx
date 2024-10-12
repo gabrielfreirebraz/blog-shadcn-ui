@@ -12,8 +12,6 @@ const Page = async ({
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
   const result = await wisp.getPosts({ limit: 6, page });
 
-  console.dir(result.posts)
-
   return (
     <div className="container mx-auto px-5 mb-10">
       <Header />
