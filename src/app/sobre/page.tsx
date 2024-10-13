@@ -8,7 +8,7 @@ import Markdown from "react-markdown";
 
 const content = `# Sobre
 
-Olá! Eu sou Bruna Brandão, blogueira nas horas vagas e entusiasta do mundo das finanças. Embora eu não seja uma especialista no assunto, sou apaixonada por aprender e compartilhar o que descubro sobre educação financeira, investimentos e gestão de finanças pessoais.
+Olá! Eu sou Bruna Brandão, blogueira nas horas vagas e entusiasta do mundo das finanças. Eu sou apaixonada por aprender e compartilhar o que descubro sobre educação financeira, investimentos e gestão de finanças pessoais.
 
 O objetivo deste blog é dividir minhas experiências e aprendizados na minha jornada de conhecimento financeiro. Aqui, você encontrará artigos que exploram temas como **economia**, **poupança**, **investimentos** e **planejamento financeiro**, sempre com o foco em tornar esses assuntos mais acessíveis e compreensíveis para todos.
 
@@ -21,15 +21,15 @@ A minha visão com este blog é criar um espaço onde possamos discutir e compar
 
 export async function generateMetadata() {
   return {
-    title: "Sobre Mim",
+    title: "Sobre",
     description: "Descubra conteúdos práticos e acessíveis sobre finanças pessoais, economia e planejamento financeiro. Nosso blog oferece dicas e informações úteis para ajudar você a tomar decisões financeiras inteligentes.",
     openGraph: {
-      title: "Sobre Mim",
+      title: "Sobre",
       description: "Descubra conteúdos práticos e acessíveis sobre finanças pessoais, economia e planejamento financeiro. Nosso blog oferece dicas e informações úteis para ajudar você a tomar decisões financeiras inteligentes.",
       images: [
         signOgImageUrl({
-          title: "Bruna",
-          label: "Sobre Mim",
+          title: "Bruna Brandão",
+          label: "Sobre",
           brand: config.blog.name,
         }),
       ],
