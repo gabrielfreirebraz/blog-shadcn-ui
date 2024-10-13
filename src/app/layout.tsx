@@ -4,6 +4,8 @@ import { signOgImageUrl } from "@/lib/og-image";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Head from "next/head";
+
 import "./globals.css";
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -32,15 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="BolsoExtra" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </head>
+    <html lang="pt-BR">
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />        
+      </Head>
 
       <body
         className={cn(

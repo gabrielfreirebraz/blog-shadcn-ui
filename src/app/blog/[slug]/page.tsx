@@ -4,15 +4,26 @@ import { Header } from "@/components/Header";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
-import { wisp } from "@/lib/wisp";
+import { GetPostResult, wisp } from "@/lib/wisp";
 import { notFound } from "next/navigation";
+
 import type { BlogPosting, WithContext } from "schema-dts";
+
+import Script from "next/script";
+
+
+interface GetPostResultWithMetadata extends GetPostResult {
+  post: GetPostResult['post'] & {
+      metadata?: Record<string, string | null>; 
+  };
+}
 
 export async function generateMetadata({
   params: { slug },
 }: {
   params: Params;
 }) {
+
   const result = await wisp.getPost(slug);
   if (!result || !result.post) {
     return {
@@ -20,12 +31,19 @@ export async function generateMetadata({
     };
   }
 
-  const { title, description, image } = result.post;
+  const { title, description, image, metadata } = result.post as GetPostResultWithMetadata['post'];
   const generatedOgImage = signOgImageUrl({ title, brand: config.blog.name });
 
   return {
     title,
     description,
+    alternates: {
+      canonical: metadata?.canonicalUrl ? metadata.canonicalUrl : undefined, 
+    },
+    robots: {
+      index: true, 
+      follow: true, 
+    },
     openGraph: {
       title,
       description,
@@ -45,8 +63,8 @@ const Page = async ({ params: { slug } }: { params: Params }) => {
     return notFound();
   }
 
-  const { title, publishedAt, updatedAt, image, author } = result.post;
-
+  const { title, publishedAt, updatedAt, image, author, metadata } = result.post as GetPostResultWithMetadata['post'];
+  
   const jsonLd: WithContext<BlogPosting> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -56,23 +74,26 @@ const Page = async ({ params: { slug } }: { params: Params }) => {
     dateModified: updatedAt.toString(),
     author: {
       "@type": "Person",
-      name: author.name ?? undefined,
-      image: author.image ?? undefined,
+      name: metadata?.author ?? (author.name ?? undefined),
+      image: metadata?.authorImage ?? (author.image ?? undefined),
     },
   };
-
+  console.dir(result.post.author)
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <>      
       <div className="container mx-auto px-5">
         <Header />
         <BlogPostContent post={result.post} />
         <RelatedPosts posts={posts} />
         <Footer />
       </div>
+
+      <Script
+        id="json-ld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 };
