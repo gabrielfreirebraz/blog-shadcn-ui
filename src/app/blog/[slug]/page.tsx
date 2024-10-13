@@ -78,7 +78,7 @@ const Page = async ({ params: { slug } }: { params: Params }) => {
       image: metadata?.authorImage ?? (author.image ?? undefined),
     },
   };
-  console.dir(result.post.author)
+  
   return (
     <>      
       <div className="container mx-auto px-5">

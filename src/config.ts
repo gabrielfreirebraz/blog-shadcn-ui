@@ -1,14 +1,14 @@
 const buildConfig = () => {
   const blogId = process.env.NEXT_PUBLIC_BLOG_ID;
   if (!blogId) throw new Error("NEXT_PUBLIC_BLOG_ID is missing");
-  const name = process.env.NEXT_PUBLIC_BLOG_DISPLAY_NAME || "";
-  const copyright = process.env.NEXT_PUBLIC_BLOG_COPYRIGHT || "";
+  const name = process.env.NEXT_PUBLIC_BLOG_DISPLAY_NAME || "Bolso Extra";
+  const copyright = process.env.NEXT_PUBLIC_BLOG_COPYRIGHT || "Bolso Extra";
   const defaultTitle =
-    process.env.NEXT_DEFAULT_METADATA_DEFAULT_TITLE || "";
-  const defaultDescription = process.env.NEXT_PUBLIC_BLOG_DESCRIPTION || "";
+    process.env.NEXT_DEFAULT_METADATA_DEFAULT_TITLE || "Bolso Extra - Blog sobre finanças pessoais, economia e planejamento financeiro.";
+  const defaultDescription = process.env.NEXT_PUBLIC_BLOG_DESCRIPTION || "Descubra conteúdos práticos e acessíveis sobre finanças pessoais, economia e planejamento financeiro. Nosso blog oferece dicas e informações úteis para ajudar você a tomar decisões financeiras inteligentes.";
 
   return {
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "https://bolsoextra.com.br",
     blog: {
       name,
       copyright,
@@ -16,9 +16,10 @@ const buildConfig = () => {
         title: {
           absolute: defaultTitle,
           default: defaultTitle,
-          template: `%s - ${defaultTitle}`,
+          template: `%s - ${name}`,
         },
         description: defaultDescription,
+        canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://bolsoextra.com.br"}/`,
       },
     },
     ogImageSecret:
