@@ -4,21 +4,24 @@ import { Banner } from '../types';
 
 export type TAdSlotState = {
   googletagLoaded: boolean;
+  firstPageLoaded: boolean;
   banners: Banner[];
 };
 
 export type TAdSlotActions = {
-  setGoogletagLoaded: (isLoaded: boolean) => void;
-  setBannerLoaded: (banner: Banner) => void;
+  setGoogletagLoaded: (googletagLoaded: boolean) => void;
+  setBanner: (banner: Banner) => void;
+  setFirstPageLoaded: (firstPageLoad: boolean) => void;
 };
 
 export const useAdSlotStore = create<TAdSlotState & TAdSlotActions>()((set, get) => ({
-  banners: [],
+  banners: [] as Banner[],
   googletagLoaded: false,
-  setGoogletagLoaded: (loaded: boolean) => {
-    set({ googletagLoaded: loaded });
+  firstPageLoaded: true,
+  setGoogletagLoaded: (googletagLoaded: boolean) => {
+    set({ googletagLoaded });
   },
-  setBannerLoaded: (banner: Banner) => {
+  setBanner: (banner: Banner) => {
     const banners = get().banners;
     const bannerExists = banners.some((b) => b.divName === banner.divName);
 
@@ -26,5 +29,8 @@ export const useAdSlotStore = create<TAdSlotState & TAdSlotActions>()((set, get)
       banners.push(banner);
       set({ banners });
     }
+  },
+  setFirstPageLoaded: (firstPageLoaded: boolean) => {
+    set({ firstPageLoaded });
   },
 }));

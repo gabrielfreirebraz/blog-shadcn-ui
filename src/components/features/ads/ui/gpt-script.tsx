@@ -18,11 +18,6 @@ export function GPTScript() {
       onLoad={() => {
         setGoogletagLoaded(true);
       }}
-    >
-      {`
-      var googletag = googletag || {};
-      googletag.cmd = googletag.cmd || [];
-    `}
-    </Script>
+    />
   );
 }

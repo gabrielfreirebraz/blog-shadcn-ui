@@ -4,39 +4,13 @@ import { useAdSlotStore } from './store/google-ads-store';
 import { GPTAdsConstants } from './consts';
 import { TUseGPTAdSlotProps } from './types';
 
-export const useAdManager = ({ id }: TUseGPTAdSlotProps) => {
-  const { banners, setBannerLoaded } = useAdSlotStore();
-
-  useEffect(() => {
-    AdManager({
-      id,
-      bannerCofig: { banners, setBannerLoaded },
-    }).initBanner();
-
-    return () => {
-      refreshSlots();
-    };
-  }, []);
-
-  const refreshSlots = () => {
-    if (typeof window !== 'undefined') {
-      const { googletag } = window;
-      if (googletag) {
-        googletag.cmd.push(() => {
-          googletag.pubads().refresh();
-        });
-      }
-    }
-  };
-};
-
-const AdManager = ({ id, bannerCofig }: TUseGPTAdSlotProps) => {
+const AdManager = ({ id, bannerLoadedInPage }: TUseGPTAdSlotProps) => {
   const initBanner = () => {
     const ad = GPTAdsConstants[id];
     const mapping = ad.mapping;
     const sizes = ad.sizes;
 
-    bannerCofig.setBannerLoaded({
+    bannerLoadedInPage?.setBanner({
       id,
       divName: `div-gpt-ad-${id.toLowerCase()}`,
       loaded: true,
@@ -46,4 +20,15 @@ const AdManager = ({ id, bannerCofig }: TUseGPTAdSlotProps) => {
   };
 
   return { initBanner };
+};
+
+export const useAdManager = ({ id }: TUseGPTAdSlotProps) => {
+  const { banners, setBanner } = useAdSlotStore();
+
+  useEffect(() => {
+    AdManager({
+      id,
+      bannerLoadedInPage: { banners, setBanner },
+    }).initBanner();
+  }, [id]);
 };
