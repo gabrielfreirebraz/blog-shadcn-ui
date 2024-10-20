@@ -19,7 +19,7 @@ const Page = async ({
     <div className="container mx-auto px-5 mb-10">
       <Header />
       <BlogPostsPreview posts={result.posts} />
-      <BlogPostsPagination pagination={result.pagination} basePath={`/categoria/${params.slug}?page=`} />
+      <BlogPostsPagination pagination={result.pagination} basePath={`/categorias/${params.slug}?page=`} />
       <Footer />
     </div>
   );

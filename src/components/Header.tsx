@@ -6,7 +6,6 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { config } from "@/config";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Image from "next/image";
@@ -22,9 +21,9 @@ interface MenuItem {
 type MenuCategoryItem = MenuItem & { categoryName: 'FINANCE' | 'INVESTIMENTS' | 'MINDSET' }
 
 const categoryItems: MenuCategoryItem[] = [
-  { name: "Finanças", href: "/categoria/financas-basicas", categoryName: "FINANCE" },
-  { name: "Investimentos", href: "/categoria/investimentos-para-iniciantes", categoryName: "INVESTIMENTS" },
-  { name: "Mentalidade", href: "/categoria/mentalidade-financeira", categoryName: "MINDSET" },
+  { name: "Finanças", href: "/categorias/financas-basicas", categoryName: "FINANCE" },
+  { name: "Investimentos", href: "/categorias/investimentos-para-iniciantes", categoryName: "INVESTIMENTS" },
+  { name: "Mentalidade", href: "/categorias/mentalidade-financeira", categoryName: "MINDSET" },
 ]
 
 const menuItems: MenuItem[] = [
@@ -46,7 +45,7 @@ export const Navigation: FunctionComponent = () => {
               target={item.openInNewTab ? "_blank" : "_self"}
               className={cn(
                 "hover:text-gray-900",
-                pathname === item.href && "font-semibold text-selected"
+                pathname === item.href && "font-bold"
               )}
             >
               {item.name}
@@ -69,7 +68,7 @@ export const Navigation: FunctionComponent = () => {
                     target={item.openInNewTab ? "_blank" : "_self"}
                     className={cn(
                       "block py-2",
-                      pathname === item.href && "font-semibold text-selected"
+                      pathname === item.href && "font-bold"
                     )}
                   >
                     {item.name}
