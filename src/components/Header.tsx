@@ -28,8 +28,8 @@ const categoryItems: MenuCategoryItem[] = [
 ]
 
 const menuItems: MenuItem[] = [
-  ...categoryItems,
   { name: "Blog", href: "/" },
+  ...categoryItems,  
   { name: "Sobre", href: "/sobre" },
   { name: "Contato", href: "/contato" },
 ];
