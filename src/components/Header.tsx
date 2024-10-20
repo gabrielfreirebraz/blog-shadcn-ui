@@ -21,9 +21,9 @@ interface MenuItem {
 type MenuCategoryItem = MenuItem & { categoryName: 'FINANCE' | 'INVESTIMENTS' | 'MINDSET' }
 
 const categoryItems: MenuCategoryItem[] = [
-  { name: "Finanças", href: "/categorias/financas-basicas", categoryName: "FINANCE" },
-  { name: "Investimentos", href: "/categorias/investimentos-para-iniciantes", categoryName: "INVESTIMENTS" },
-  { name: "Mentalidade", href: "/categorias/mentalidade-financeira", categoryName: "MINDSET" },
+  { name: "Finanças", href: "/blog/categorias/financas-basicas", categoryName: "FINANCE" },
+  { name: "Investimentos", href: "/blog/categorias/investimentos-para-iniciantes", categoryName: "INVESTIMENTS" },
+  { name: "Mentalidade", href: "/blog/categorias/mentalidade-financeira", categoryName: "MINDSET" },
 ]
 
 const menuItems: MenuItem[] = [
@@ -87,7 +87,7 @@ export const Header: FunctionComponent = () => {
     <section className="flex items-center justify-between mt-8 md:mt-16 mb-12">
       <Link href="/" className="md:-mt-8">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-          <Image alt={`Logo Bolso Extra`} src={`/images/bolsoextra.png`} height={100} width={175} />
+          <Image alt={`Logo Bolso Extra`} src={`/images/bolsoextra.png`} height={100} width={150} />
         </h1>
       </Link>
       <Navigation />
