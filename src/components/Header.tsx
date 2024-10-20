@@ -27,7 +27,6 @@ const categoryItems: MenuCategoryItem[] = [
 ]
 
 const menuItems: MenuItem[] = [
-  { name: "Blog", href: "/" },
   ...categoryItems,  
   { name: "Sobre", href: "/sobre" },
   { name: "Contato", href: "/contato" },
@@ -40,7 +39,7 @@ export const Navigation: FunctionComponent = () => {
       <div className="hidden md:flex items-center">
         {menuItems.map((item) => (
           <div key={item.href} className="ml-4 md:ml-8">
-            <a
+            <Link
               href={item.href}
               target={item.openInNewTab ? "_blank" : "_self"}
               className={cn(
@@ -49,7 +48,7 @@ export const Navigation: FunctionComponent = () => {
               )}
             >
               {item.name}
-            </a>
+            </Link>
           </div>
         ))}
       </div>
@@ -62,7 +61,7 @@ export const Navigation: FunctionComponent = () => {
             <SheetHeader>
               <SheetDescription>
                 {menuItems.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
                     target={item.openInNewTab ? "_blank" : "_self"}
@@ -72,7 +71,7 @@ export const Navigation: FunctionComponent = () => {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </SheetDescription>
             </SheetHeader>
