@@ -18,7 +18,17 @@ interface MenuItem {
   href: string;
   openInNewTab?: boolean;
 }
+
+type MenuCategoryItem = MenuItem & { categoryName: 'FINANCE' | 'INVESTIMENTS' | 'MINDSET' }
+
+const categoryItems: MenuCategoryItem[] = [
+  { name: "Finanças", href: "/categoria/financas-basicas", categoryName: "FINANCE" },
+  { name: "Investimentos", href: "/categoria/investimentos-para-iniciantes", categoryName: "INVESTIMENTS" },
+  { name: "Mentalidade", href: "/categoria/mentalidade-financeira", categoryName: "MINDSET" },
+]
+
 const menuItems: MenuItem[] = [
+  ...categoryItems,
   { name: "Blog", href: "/" },
   { name: "Sobre", href: "/sobre" },
   { name: "Contato", href: "/contato" },
@@ -36,7 +46,7 @@ export const Navigation: FunctionComponent = () => {
               target={item.openInNewTab ? "_blank" : "_self"}
               className={cn(
                 "hover:text-gray-900",
-                pathname === item.href && "font-semibold"
+                pathname === item.href && "font-semibold text-selected"
               )}
             >
               {item.name}
@@ -59,7 +69,7 @@ export const Navigation: FunctionComponent = () => {
                     target={item.openInNewTab ? "_blank" : "_self"}
                     className={cn(
                       "block py-2",
-                      pathname === item.href && "font-semibold"
+                      pathname === item.href && "font-semibold text-selected"
                     )}
                   >
                     {item.name}

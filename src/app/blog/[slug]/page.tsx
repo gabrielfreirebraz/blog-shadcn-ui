@@ -4,19 +4,12 @@ import { Header } from "@/components/Header";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { config } from "@/config";
 import { signOgImageUrl } from "@/lib/og-image";
-import { GetPostResult, wisp } from "@/lib/wisp";
+import { wisp } from "@/lib/wisp";
 import { notFound } from "next/navigation";
 
 import type { BlogPosting, WithContext } from "schema-dts";
 
 import Script from "next/script";
-
-
-interface GetPostResultWithMetadata extends GetPostResult {
-  post: GetPostResult['post'] & {
-      metadata?: Record<string, string | null>; 
-  };
-}
 
 export async function generateMetadata({
   params: { slug },
@@ -62,7 +55,7 @@ const Page = async ({ params: { slug } }: { params: Params }) => {
   if (!result || !result.post) {
     return notFound();
   }
-
+  
   const { title, publishedAt, updatedAt, image, author, metadata } = result.post as GetPostResultWithMetadata['post'];
   
   const jsonLd: WithContext<BlogPosting> = {

@@ -16,7 +16,7 @@ export const RelatedPosts: FunctionComponent<{
   return (
     <div className="my-8 max-w-prose text-xl mx-auto">
       <div className="mb-6 text-lg font-semibold tracking-tight">
-        Related Posts
+        Posts relacionados
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {posts.slice(0, 3).map((post) => (
@@ -35,7 +35,7 @@ export const RelatedPosts: FunctionComponent<{
               <h3 className="line-clamp-2">{post.title}</h3>
               <p className="line-clamp-3">{post.description}</p>
               <Link href={`/blog/${post.slug}`}>
-                <strong>Read Full Story</strong>
+                <strong>Leia o Artigo Completo</strong>
               </Link>
             </div>
           </div>

@@ -70,7 +70,7 @@ export const BlogPostContent = ({ post }: { post: GetPostResult["post"] }) => {
           ))}
         </div>
         <div className="text-sm opacity-40 mt-4">
-          {Intl.DateTimeFormat("en-US").format(
+          {Intl.DateTimeFormat("pt-BR").format(
             new Date(publishedAt || createdAt)
           )}
         </div>
