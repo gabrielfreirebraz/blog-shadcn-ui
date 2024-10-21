@@ -21,9 +21,9 @@ interface MenuItem {
 type MenuCategoryItem = MenuItem & { categoryName: 'FINANCE' | 'INVESTIMENTS' | 'MINDSET' }
 
 const categoryItems: MenuCategoryItem[] = [
-  { name: "Finanças", href: "/blog/categorias/financas-basicas", categoryName: "FINANCE" },
-  { name: "Investimentos", href: "/blog/categorias/investimentos-para-iniciantes", categoryName: "INVESTIMENTS" },
-  { name: "Mentalidade", href: "/blog/categorias/mentalidade-financeira", categoryName: "MINDSET" },
+  { name: "Finanças", href: "/categoria/financas-pessoais", categoryName: "FINANCE" },
+  { name: "Investimentos", href: "/categoria/investimentos", categoryName: "INVESTIMENTS" },
+  { name: "Mentalidade", href: "/categoria/mentalidade", categoryName: "MINDSET" },
 ]
 
 const menuItems: MenuItem[] = [

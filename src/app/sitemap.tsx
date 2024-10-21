@@ -7,13 +7,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const result = await wisp.getPosts();
   return [
     {
-      url: urlJoin(config.baseUrl, "blog"),
+      url: urlJoin(config.baseUrl, ""),
       lastModified: new Date(),
       priority: 0.8,
     },
     ...result.posts.map((post) => {
+      const category = post.tags[0].name;
       return {
-        url: urlJoin(config.baseUrl, "blog", post.slug),
+        url: urlJoin(config.baseUrl, `${category}`, post.slug),
         lastModified: new Date(post.updatedAt),
         priority: 0.8,
       };

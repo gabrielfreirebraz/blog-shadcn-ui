@@ -9,10 +9,13 @@ import { FunctionComponent } from "react";
 
 export const BlogPostPreview: FunctionComponent<{
   post: GetPostsResult["posts"][0];
-}> = ({ post }) => {  
+  categorySlug: string | undefined;
+}> = ({ post, categorySlug }) => {  
+  const slug = categorySlug ?? post.tags[0].name;
+  
   return (
     <div className="break-words">
-      <Link href={`/blog/${post.slug}`}>
+      <Link href={`/${slug}/${post.slug}`}>
         <div className="aspect-[16/9] relative">
           <Image
             alt={post.title}
@@ -24,7 +27,7 @@ export const BlogPostPreview: FunctionComponent<{
       </Link>
       <div className="grid grid-cols-1 gap-3 md:col-span-2 mt-4">
         <h2 className="font-sans font-semibold tracking-tighter text-primary text-2xl md:text-3xl">
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <Link href={`/${post.slug}`}>{post.title}</Link>
         </h2>
         <div className="prose lg:prose-lg italic tracking-tighter text-muted-foreground">
           {formatDate(post.publishedAt || post.updatedAt, "dd MMMM yyyy", { locale: ptBR })}
@@ -47,7 +50,8 @@ export const BlogPostPreview: FunctionComponent<{
 export const BlogPostsPreview: FunctionComponent<{
   posts: GetPostsResult["posts"];
   className?: string;
-}> = ({ posts, className }) => {
+  categorySlug?: string;
+}> = ({ posts, className, categorySlug }) => {
   
   return (
     <div
@@ -57,7 +61,7 @@ export const BlogPostsPreview: FunctionComponent<{
       )}
     >
       {posts.map((post: GetPostResultWithMetadata['post']) => (
-        <BlogPostPreview key={post.id} post={post} />
+        <BlogPostPreview key={post.id} post={post} categorySlug={categorySlug} />
       ))}
     </div>
   );

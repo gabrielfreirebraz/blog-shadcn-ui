@@ -9,17 +9,17 @@ const Page = async ({
   params,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
-  params: { slug: string }
+  params: { category: string }
 }) => {
   
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
-  const result = await wisp.getPosts({ limit: 6, page, tags: [params.slug] });
+  const result = await wisp.getPosts({ limit: 6, page, tags: [params.category] });
 
   return (
     <div className="container mx-auto px-5 mb-10">
       <Header />
-      <BlogPostsPreview posts={result.posts} />
-      <BlogPostsPagination pagination={result.pagination} basePath={`/blog/categorias/${params.slug}?page=`} />
+      <BlogPostsPreview posts={result.posts} categorySlug={params.category} />
+      <BlogPostsPagination pagination={result.pagination} basePath={`/categoria/${params.category}?page=`} />
       <Footer />
     </div>
   );
