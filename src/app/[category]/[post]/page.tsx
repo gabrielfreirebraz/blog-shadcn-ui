@@ -11,6 +11,7 @@ import type { BlogPosting, WithContext } from "schema-dts";
 
 import Script from "next/script";
 import { GetPostResult } from "@wisp-cms/client";
+import { BlogPostCommentSection } from "@/components/BlogPostCommentSection";
 
 export const revalidate = 604800; // 7 days to revalidate as ISR (NO SSR)
 
@@ -90,6 +91,7 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
         <Header />
         <BlogPostContent post={result.post} />
         <RelatedPosts posts={relatedPosts} />
+        <BlogPostCommentSection />
         <Footer />
       </div>
 
