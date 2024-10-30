@@ -83,16 +83,9 @@ export const BlogPostCommentSection = () => {
                     borderBottom: '1px solid black', 
                     color: 'black' 
                 }}
-                onSubmitAction={(data: {
-                    userId: string
-                    comId: string
-                    avatarUrl: string
-                    userProfile?: string
-                    fullName: string
-                    text: string
-                    replies: any
-                    commentId: string
-                }) => console.log('check submit, ', data)}
+                onSubmitAction={(data: OnSubmitCommentData) => {
+                    console.log('check submit, ', data)
+                }}
                 currentData={(data: any) => {
                     console.log('current data', data)
                 }}
