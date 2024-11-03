@@ -34,7 +34,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                             fullName: currData.full_name,
                             text: currData.text,
                             replies: currData.replies ?? [],
-                            timestamp: currData.create_at
+                            timestamp: currData.created_at
                         }
                     )
                 )

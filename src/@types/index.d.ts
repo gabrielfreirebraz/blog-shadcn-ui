@@ -25,5 +25,5 @@ interface CommentDataApi {
     full_name: string
     text: string
     replies: []
-    create_at: string
+    created_at: string
 }
