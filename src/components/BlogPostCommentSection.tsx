@@ -57,22 +57,22 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
     return <div className='lg:mx-[6%] xl:mx-32 my-20'>
             <CommentSection
                 currentUser={{
-                currentUserId: '01a',
-                currentUserImg:
-                    'https://ui-avatars.com/api/name=Riya&background=random',
-                currentUserProfile:
-                    'https://www.linkedin.com/in/riya-negi-8879631a9/',
-                currentUserFullName: 'Riya Negi'
+                    currentUserId: '01a',
+                    currentUserImg:
+                        'https://ui-avatars.com/api/name=GabrielBraz&background=random',
+                    currentUserProfile:
+                        'https://www.linkedin.com/in/gabrielfreirebraz/',
+                    currentUserFullName: 'Gabriel Braz'
                 }}
                 advancedInput={true}
                 hrStyle={{ border: 'none' }}
                 commentData={comments}
                 logIn={{
-                onLogin: () => alert("Call login function"),
-                signUpLink: 'http://localhost:3000/'
+                    onLogin: () => alert("Call login function"),
+                    signUpLink: 'http://localhost:3000/'
                 }}
                 placeHolder={"Write a comment..."}
-                customImg='https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg&q=60'
+                // customImg='/images/user-avatar.png'
                 formStyle={{ 
                     backgroundColor: 'transparent', 
                     paddingTop: '0px', 
@@ -85,21 +85,31 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                     marginRight: '10px'
                 }}
                 submitBtnStyle={{
-                border: '1px solid black',
-                borderRadius: '5px',
-                backgroundColor: 'black',
-                padding: '7px 15px 5px'
+                    border: '1px solid black',
+                    borderRadius: '5px',
+                    backgroundColor: 'black',
+                    padding: '7px 15px 5px',
+                    fontWeight: 'normal',
+                    fontSize: '14px'
                 }}
                 cancelBtnStyle={{
-                border: '1px solid #efeded',
-                borderRadius: '5px',
-                backgroundColor: '#efeded',
-                color: '#000',
-                padding: '7px 15px 5px'
+                    border: '1px solid #efeded',
+                    borderRadius: '5px',
+                    backgroundColor: '#efeded',
+                    color: '#000',
+                    padding: '7px 15px 5px',
+                    fontWeight: 'normal',
+                    fontSize: '14px'
                 }}
                 replyInputStyle={{ 
                     borderBottom: '1px solid black', 
                     color: 'black' 
+                }}
+                imgStyle={{
+                    borderRadius: '5px',
+                    height: '32px',
+                    width: '34px',
+                    marginTop: '15px'
                 }}
                 onSubmitAction={(data: CommentDataLibrary) => {
                     console.log('check submit, ', data)
