@@ -15,6 +15,7 @@ const CommentSection = dynamic(() => import('react-comments-section').then(mod =
 export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
 
     const [comments, setComments] = useState<CommentDataLibrary[]>([]);
+    const [newComment, setNewComment] = useState<CommentDataLibrary | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const fetchComments = async () => {
@@ -51,6 +52,34 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
 
         fetchComments();
     }, []);
+
+
+    useEffect(() => {
+
+        if (newComment) {
+        
+            const newCommentToInsert: CommentDataApi = {
+                post_id: postId,
+                comment_id: newComment.comId,
+                user_id: newComment.userId,
+                avatar_url: newComment.avatarUrl,
+                user_profile: newComment.userProfile,
+                full_name: newComment.fullName,
+                text: newComment.text,
+                replies: newComment.replies ?? [],
+                created_at: new Date().toISOString(),
+            } as CommentDataApi
+
+            axios.post(`/api/comments`, newCommentToInsert).then(() => {
+                setNewComment(null)
+            });
+
+            console.log(`check insert`, newCommentToInsert)
+        }
+        
+    }, [newComment]);
+
+    
 
     if (error) return <p>{error}</p>;
 
@@ -113,11 +142,8 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                 }}
                 onSubmitAction={(data: CommentDataLibrary) => {
 
-                    data.postId = postId
-                    const newCommentToInsert = data
-
-                    console.log('check submit, ', newCommentToInsert)
-                    axios.post(`/api/comments`, newCommentToInsert);
+                    setNewComment(data)
+                    console.log('check submit, ', data)
                 }}
                 currentData={(data: any) => {
                     console.log('current data', data)

@@ -25,21 +25,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 // POST method to add a comment
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const body: CommentDataLibrary = await req.json();
+  const ItemNewCommentDataApi: CommentDataApi = await req.json();
 
   const params = {
     TableName: 'comments',
-    Item: {
-      post_id: body.postId,
-      comment_id: body.comId,
-      user_id: body.userId,
-      avatar_url: body.avatarUrl,
-      user_profile: body.userProfile,
-      full_name: body.fullName,
-      text: body.text,
-      replies: body.replies,
-      created_at: new Date().toISOString(),
-    } as CommentDataApi,
+    Item: ItemNewCommentDataApi,
   };
 
   try {
