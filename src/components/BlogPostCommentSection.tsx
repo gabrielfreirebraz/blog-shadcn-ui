@@ -1,8 +1,9 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // import { CommentSection} from 'react-comments-section'
 import 'react-comments-section/dist/index.css'
+import axios from 'axios';
 import dynamic from 'next/dynamic';
 
 
@@ -11,31 +12,48 @@ const CommentSection = dynamic(() => import('react-comments-section').then(mod =
     loading: () => <p>Carregando comentários...</p>, 
 });
 
-export const BlogPostCommentSection = () => {
+export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
 
-    const data = [
-        {
-          userId: '01a',
-          comId: '012',
-          fullName: 'Riya Negi',
-          avatarUrl: 'https://ui-avatars.com/api/name=Riya&background=random',
-          userProfile: 'https://www.linkedin.com/in/riya-negi-8879631a9/',
-          text: 'Hey, Loved your blog! ',
-          timestamp: "2024-09-28T10:34:56Z",
-          replies: []
-        },
-        {
-          userId: '02b',
-          comId: '017',
-          fullName: 'Lily',
-          userProfile: 'https://www.linkedin.com/in/riya-negi-8879631a9/',
-          text: 'I have a doubt about the 4th point🤔',
-          timestamp: "2024-09-28T10:34:56Z",
-          avatarUrl: 'https://ui-avatars.com/api/name=Lily&background=random',
-          replies: []
-        }
-    ]
-    
+    const [comments, setComments] = useState<CommentDataLibrary[]>([]);
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchComments = async () => {
+        try {
+            const { data }: { data: CommentDataApi[] } = await axios.get(`/api/comments`, {
+                params: { postId }
+            });
+            
+            setComments(() => {
+                const newData: CommentDataLibrary[] = data.map((currData: CommentDataApi) => (
+                        {
+                            postId: currData.post_id,
+                            comId: currData.comment_id,
+                            userId: currData.user_id,
+                            avatarUrl: currData.avatar_url,
+                            userProfile: currData.user_profile,
+                            fullName: currData.full_name,
+                            text: currData.text,
+                            replies: currData.replies ?? [],
+                            timestamp: currData.create_at
+                        }
+                    )
+                )
+
+                return newData
+            });
+        } catch (err) {
+            console.error('Error fetching comments:', err);
+            setError('Failed to load comments');
+        } 
+    };
+
+    useEffect(() => {
+
+        fetchComments();
+    }, []);
+
+    if (error) return <p>{error}</p>;
+
     return <div className='lg:mx-[6%] xl:mx-32 my-20'>
             <CommentSection
                 currentUser={{
@@ -48,7 +66,7 @@ export const BlogPostCommentSection = () => {
                 }}
                 advancedInput={true}
                 hrStyle={{ border: 'none' }}
-                commentData={data}
+                commentData={comments}
                 logIn={{
                 onLogin: () => alert("Call login function"),
                 signUpLink: 'http://localhost:3000/'
@@ -83,7 +101,7 @@ export const BlogPostCommentSection = () => {
                     borderBottom: '1px solid black', 
                     color: 'black' 
                 }}
-                onSubmitAction={(data: OnSubmitCommentData) => {
+                onSubmitAction={(data: CommentDataLibrary) => {
                     console.log('check submit, ', data)
                 }}
                 currentData={(data: any) => {

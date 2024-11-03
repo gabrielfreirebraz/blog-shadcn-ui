@@ -91,7 +91,7 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
         <Header />
         <BlogPostContent post={result.post} />
         <RelatedPosts posts={relatedPosts} />
-        <BlogPostCommentSection />
+        <BlogPostCommentSection postId={result.post.id} />
         <Footer />
       </div>
 
