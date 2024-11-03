@@ -11,7 +11,7 @@ interface CommentDataLibrary {
     userProfile?: string
     fullName: string
     text: string
-    replies?: CommentDataLibrary[]
+    replies?: []
     timestamp?: string
     postId?: string //
 }

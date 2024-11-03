@@ -112,7 +112,12 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                     marginTop: '15px'
                 }}
                 onSubmitAction={(data: CommentDataLibrary) => {
-                    console.log('check submit, ', data)
+
+                    data.postId = postId
+                    const newCommentToInsert = data
+
+                    console.log('check submit, ', newCommentToInsert)
+                    axios.post(`/api/comments`, newCommentToInsert);
                 }}
                 currentData={(data: any) => {
                     console.log('current data', data)

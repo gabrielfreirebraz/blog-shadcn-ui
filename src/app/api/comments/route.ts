@@ -39,7 +39,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       text: body.text,
       replies: body.replies,
       created_at: new Date().toISOString(),
-    },
+    } as CommentDataApi,
   };
 
   try {
