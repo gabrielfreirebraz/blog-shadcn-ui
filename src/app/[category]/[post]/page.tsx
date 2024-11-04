@@ -9,9 +9,12 @@ import { notFound } from "next/navigation";
 
 import type { BlogPosting, WithContext } from "schema-dts";
 
-import Script from "next/script";
 import { GetPostResult } from "@wisp-cms/client";
 import { BlogPostCommentSection } from "@/components/BlogPostCommentSection";
+
+import Script from "next/script";
+import AuthWrapper from "@/components/AuthWrapper";
+
 
 export const revalidate = 604800; // 7 days to revalidate as ISR (NO SSR)
 
@@ -91,7 +94,9 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
         <Header />
         <BlogPostContent post={result.post} />
         <RelatedPosts posts={relatedPosts} />
-        <BlogPostCommentSection postId={result.post.id} />
+        <AuthWrapper>
+          <BlogPostCommentSection postId={result.post.id} />
+        </AuthWrapper>
         <Footer />
       </div>
 

@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { v4 as uuidv4 } from 'uuid';
 
 // import { CommentSection} from 'react-comments-section'
 import 'react-comments-section/dist/index.css'
@@ -14,8 +16,11 @@ const CommentSection = dynamic(() => import('react-comments-section').then(mod =
 
 export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
 
+    const { data: session, status } = useSession();
+
     const [comments, setComments] = useState<CommentDataLibrary[]>([]);
     const [newComment, setNewComment] = useState<CommentDataLibrary | null>(null);
+    const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const fetchComments = async () => {
@@ -80,27 +85,41 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
     }, [newComment]);
 
     
+    useEffect(() => {
+
+        if (status === 'authenticated') {
+            const user: GoogleUser | undefined = session?.user
+
+            const current_user: CurrentUser | null = { 
+                currentUserId: uuidv4(),
+                currentUserFullName: user?.name ?? '',
+                currentUserImg: user?.image ?? '',
+                currentUserProfile: user?.email ? `mailto:${user?.email}` : ''
+                
+            }
+            setCurrentUser(current_user)
+        }
+    },[status])
+
 
     if (error) return <p>{error}</p>;
 
+
     return <div className='lg:mx-[6%] xl:mx-32 my-20'>
+
             <CommentSection
-                currentUser={{
-                    currentUserId: '01a',
-                    currentUserImg:
-                        'https://ui-avatars.com/api/name=GabrielBraz&background=random',
-                    currentUserProfile:
-                        'https://www.linkedin.com/in/gabrielfreirebraz/',
-                    currentUserFullName: 'Gabriel Braz'
-                }}
+                customNoComment={() => ''}
+                currentUser={currentUser}
                 advancedInput={true}
-                hrStyle={{ border: 'none' }}
-                commentData={comments}
+                hrStyle={{ border: 'none' }}                
+                commentData={comments}                
                 logIn={{
-                    onLogin: () => alert("Call login function"),
+                    onLogin: () => {
+                        signIn('google');
+                    },
                     signUpLink: 'http://localhost:3000/'
-                }}
-                placeHolder={"Write a comment..."}
+                }}                
+                placeHolder={"Escreva um comentário..."}
                 // customImg='/images/user-avatar.png'
                 formStyle={{ 
                     backgroundColor: 'transparent', 
@@ -134,12 +153,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                     borderBottom: '1px solid black', 
                     color: 'black' 
                 }}
-                imgStyle={{
-                    borderRadius: '5px',
-                    height: '32px',
-                    width: '34px',
-                    marginTop: '15px'
-                }}
+                commentsCount={comments.length}
                 onSubmitAction={(data: CommentDataLibrary) => {
 
                     setNewComment(data)
@@ -147,8 +161,42 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                 }}
                 currentData={(data: any) => {
                     console.log('current data', data)
+
+                    customizeAuthButtons()
                 }}
             />
         </div>
 }
   
+
+
+
+const customizeAuthButtons = () => {
+ 
+    // Esconder o botão de "Sign Up"
+    const signUpButton = document.querySelector('button.signBtn[name="signup"]');
+    if (signUpButton) {
+      (signUpButton as HTMLElement).style.display = 'none';
+    }
+
+    // Modificar o botão de "Log In"
+    const loginButton = document.querySelector('button.loginBtn[name="login"]');
+    if (loginButton) {
+      (loginButton as HTMLElement).textContent = 'Login com Gmail'; 
+      (loginButton as HTMLElement).style.color = 'black'; 
+      (loginButton as HTMLElement).style.borderColor = 'black'; 
+    }
+
+    // Renomear o texto da div com a classe 'signLine' para português
+    const signLineDiv = document.querySelector('div.signLine');
+    if (signLineDiv) {
+        signLineDiv.textContent = 'Faça login ou cadastre-se para deixar um comentário';
+    }
+
+    // Traduzir o texto do <span> com a classe 'comment-title' para português
+    const commentTitleSpan = document.querySelector('span.comment-title');
+    if (commentTitleSpan?.textContent) {
+        commentTitleSpan.textContent = commentTitleSpan.textContent.replace('Comments', 'Comentários');
+    }
+};
+

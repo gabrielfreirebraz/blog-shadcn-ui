@@ -27,3 +27,17 @@ interface CommentDataApi {
     replies: []
     created_at: string
 }
+
+interface GoogleUser {
+    email?: string | null | undefined
+    image?: string | null | undefined
+    name?: string | null | undefined
+}
+  
+interface CurrentUser {
+    currentUserId: string;
+    currentUserImg: string;
+    currentUserProfile: string;
+    currentUserFullName: string;
+}
+  
