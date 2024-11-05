@@ -4,6 +4,8 @@ import { signOgImageUrl } from "@/lib/og-image";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import Head from "next/head";
 
 import "./globals.css";
@@ -59,6 +61,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main>{children}</main>
+
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
         </ThemeProvider>
       </body>
     </html>

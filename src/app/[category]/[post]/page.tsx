@@ -11,6 +11,7 @@ import type { BlogPosting, WithContext } from "schema-dts";
 
 import Script from "next/script";
 import { GetPostResult } from "@wisp-cms/client";
+import TimeTracker from "@/components/TimeTracker";
 
 export const revalidate = 604800; // 7 days to revalidate as ISR (NO SSR)
 
@@ -93,6 +94,7 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
         <Footer />
       </div>
 
+      <TimeTracker />
       <Script
         id="json-ld"
         type="application/ld+json"
