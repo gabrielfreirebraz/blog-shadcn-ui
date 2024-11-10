@@ -44,7 +44,7 @@ const categoryItems: MenuCategoryItem[] = [
 
 const menuItems: MenuItem[] = [
   ...categoryItems,  
-  { name: "Materiais", href: "/material", dropdown: true },
+  { name: "Materiais", href: "/material", dropdown: false }, 
   { name: "Sobre", href: "/sobre" },
   // { name: "Contato", href: "/contato" },
 ];
