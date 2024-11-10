@@ -50,7 +50,7 @@ export default function RootLayout({
 
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-6xl m-auto",
+          "min-h-screen bg-background font-sans antialiased max-w-full my-auto lg:mx-[20%]",
           fontSans.variable
         )}
       >
