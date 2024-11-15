@@ -62,7 +62,7 @@ export default function RootLayout({
         >
           <main>{children}</main>
 
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          {process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />}
         </ThemeProvider>
       </body>
     </html>
