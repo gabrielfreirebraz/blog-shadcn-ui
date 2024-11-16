@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { SiMicrosoftexcel } from "react-icons/si";
 import { RiCalculatorLine } from "react-icons/ri";
-import { useMediaQuery } from "react-responsive";
 
 interface MenuItem {
   name: string;
@@ -58,7 +57,7 @@ export const Navigation: FunctionComponent = () => {
           <div key={item.href} className="ml-4 md:ml-8">
 
             {item.dropdown ?
-              <DropdownMaterialMenu contentClassName={`w-80 p-4`} /> 
+              <MemoizedDropdownMaterialMenu contentClassName={`w-80 p-4`} /> 
               : 
 
               <Link
@@ -124,7 +123,7 @@ export const Header: FunctionComponent = () => {
   );
 };
 
-export const DropdownMaterialMenu = memo(({contentClassName = `w-56`}: Readonly<{ contentClassName?: string }>) => {
+function DropdownMaterialMenu({contentClassName = `w-56`}: Readonly<{ contentClassName?: string }>) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -185,4 +184,10 @@ export const DropdownMaterialMenu = memo(({contentClassName = `w-56`}: Readonly<
         </DropdownMenuContent>
       </DropdownMenu>
   )
-})
+}
+
+export const MemoizedDropdownMaterialMenu = memo(DropdownMaterialMenu);
+
+
+// Adicione esta linha:
+// DropdownMaterialMenu.displayName = "DropdownMaterialMenu";
