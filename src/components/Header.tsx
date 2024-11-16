@@ -25,24 +25,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { SiMicrosoftexcel } from "react-icons/si";
 import { RiCalculatorLine } from "react-icons/ri";
+import { menuCategoryList } from "@/app/api/categoria/menu-list";
 
-interface MenuItem {
-  name: string;
-  href: string;
-  openInNewTab?: boolean;
-  dropdown?: boolean;
-}
-
-type MenuCategoryItem = MenuItem & { categoryName: 'FINANCE' | 'INVESTIMENTS' | 'MINDSET' }
-
-const categoryItems: MenuCategoryItem[] = [
-  { name: "Finanças", href: "/categoria/financas-pessoais", categoryName: "FINANCE" },
-  { name: "Investimentos", href: "/categoria/investimentos", categoryName: "INVESTIMENTS" },
-  { name: "Mentalidade", href: "/categoria/mentalidade", categoryName: "MINDSET" },
-]
 
 const menuItems: MenuItem[] = [
-  ...categoryItems,  
+  ...menuCategoryList,  
   { name: "Materiais", href: "/material-de-apoio", dropdown: false }, 
   { name: "Sobre", href: "/sobre" },
 ];

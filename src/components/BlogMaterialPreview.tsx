@@ -27,7 +27,7 @@ export const BlogMaterialPreview = ({ materiais }: { materiais: MaterialPreview[
           {materiais.map((currMaterial, i) => (
 
               currMaterial.enable && 
-                <Link href={`${currMaterial.link}`} className="flex items-center space-x-4 p-4 bg-white shadow-md rounded-lg" key={i}>
+                <Link href={`/${currMaterial.link}`} className="flex items-center space-x-4 p-4 bg-white shadow-md rounded-lg" key={i}>
                 <div className="flex-1">
                   <h2 className="text-gray-800 line-clamp-1 text-lg font-semibold">
                     {`${currMaterial.title}`}
