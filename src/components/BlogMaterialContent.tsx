@@ -13,19 +13,19 @@ export const BlogMaterialContent = ({ material }: { material: MaterialPreview}) 
         <div className="max-w-4xl mx-auto py-6 space-y-4">
           <h1 className="mb-10">{material.title}</h1>
 
-            <div className="flex py-6">
+            <div className="flex py-6 flex-col md:flex-row">
               <Image
-                  src="/images/calculadora-13.webp"
-                  alt="Imagem de calculadora de décimo terceiro salário"
+                  src={`${material.image?.src}`}
+                  alt={`${material.image?.alt}`}
                   width={150} 
                   height={150}
-                  className="rounded-lg object-cover"
+                  className="rounded-lg object-cover ml-3 mb-2 md:m-auto"
                 />
               <p className="text-sm text-gray-600 mx-4 my-1 flex flex-col">
                 {material.description}
                 
                 {material?.downloadUrl && 
-                  <Link href={material.downloadUrl} className="w-28 ml-auto mt-auto" target="_blank">
+                  <Link href={material.downloadUrl} className="w-28 md:ml-auto mt-auto pt-6" target="_blank">
                     <Button>Baixe agora</Button>
                   </Link>}
               </p>
