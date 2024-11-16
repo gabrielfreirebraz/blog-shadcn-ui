@@ -45,7 +45,6 @@ const menuItems: MenuItem[] = [
   ...categoryItems,  
   { name: "Materiais", href: "/material-de-apoio", dropdown: false }, 
   { name: "Sobre", href: "/sobre" },
-  // { name: "Contato", href: "/contato" },
 ];
 export const Navigation: FunctionComponent = () => {
   const pathname = usePathname();
@@ -187,7 +186,3 @@ function DropdownMaterialMenu({contentClassName = `w-56`}: Readonly<{ contentCla
 }
 
 export const MemoizedDropdownMaterialMenu = memo(DropdownMaterialMenu);
-
-
-// Adicione esta linha:
-// DropdownMaterialMenu.displayName = "DropdownMaterialMenu";
