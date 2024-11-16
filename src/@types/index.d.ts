@@ -41,3 +41,25 @@ interface CurrentUser {
     currentUserFullName: string;
 }
   
+
+interface MaterialPreview {
+    link: string;
+    title: string;
+    description: string;
+    dateRef?: string;
+    image?: { src: string, alt: string };
+    enable: boolean;
+    category: MaterialCategory;
+    downloadUrl?: string;
+}
+
+type MaterialCategory = 'download' | 'form'
+
+interface MenuItem {
+    name: string;
+    href: string;
+    openInNewTab?: boolean;
+    dropdown?: boolean;
+  }
+  
+  type MenuCategoryItem = MenuItem & { meta: { title: string, description: string }, slug: string }

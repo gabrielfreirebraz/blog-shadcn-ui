@@ -15,6 +15,7 @@ import { BlogPostCommentSection } from "@/components/BlogPostCommentSection";
 import Script from "next/script";
 import AuthWrapper from "@/components/AuthWrapper";
 
+import TimeTracker from "@/components/TimeTracker";
 
 export const revalidate = 604800; // 7 days to revalidate as ISR (NO SSR)
 
@@ -100,6 +101,7 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
         <Footer />
       </div>
 
+      <TimeTracker />
       <Script
         id="json-ld"
         type="application/ld+json"
