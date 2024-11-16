@@ -15,7 +15,7 @@ export const Footer: FunctionComponent = () => {
 
       <div className="flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          © {config.blog.copyright} {new Date().getFullYear()}
+          © {config.blog.copyright} {new Date().getFullYear()} - <Link href={'/contato'}>Contato</Link>
         </div>
         <div className="text-xs text-muted-foreground hidden lg:block">
           <Link
