@@ -50,7 +50,7 @@ export default function RootLayout({
 
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-6xl m-auto",
+          "min-h-screen bg-background font-sans antialiased max-w-full my-auto lg:mx-[20%]",
           fontSans.variable
         )}
       >
@@ -62,7 +62,7 @@ export default function RootLayout({
         >
           <main>{children}</main>
 
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          {process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />}
         </ThemeProvider>
       </body>
     </html>
