@@ -20,9 +20,8 @@ type MaterialCategory = 'download' | 'form'
 interface MenuItem {
     name: string;
     href: string;
-    slug: string;
     openInNewTab?: boolean;
     dropdown?: boolean;
   }
   
-  type MenuCategoryItem = MenuItem & { meta: { title: string, description: string } }
+  type MenuCategoryItem = MenuItem & { meta: { title: string, description: string }, slug: string }
