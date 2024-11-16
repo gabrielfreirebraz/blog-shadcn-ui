@@ -19,7 +19,7 @@ export const Footer: FunctionComponent = () => {
           className="font-bold underline"
         >
           página de transparência
-        </Link>
+        </Link>.
       </p>
 
       <div className="flex items-center justify-between">

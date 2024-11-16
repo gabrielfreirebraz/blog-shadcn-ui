@@ -9,6 +9,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import Head from "next/head";
 
 import "./globals.css";
+import Script from "next/script";
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -61,9 +62,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main>{children}</main>
-
-          {process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />}
         </ThemeProvider>
+
+        {process.env.NODE_ENV === 'production' && 
+          <>
+            <Script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737127050475494"
+              crossOrigin="anonymous"
+              strategy="lazyOnload"
+            />
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          </>}
+        
       </body>
     </html>
   );
