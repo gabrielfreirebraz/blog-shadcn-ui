@@ -4,10 +4,12 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: PageProps) {
+  const currentMaterial = findCurrentParamsInList(params)
+
   return {
-    title: "Material de apoio",
-    description: "Encontre recursos exclusivos para sua jornada financeira: calculadoras, planilhas, cursos e ebooks gratuitos para facilitar o aprendizado e melhorar sua organização financeira. Acesse nosso material de apoio e impulsione seu conhecimento em finanças!",      
+    title: `${currentMaterial?.title}`,
+    description: `${currentMaterial?.description}`,      
   };
 }
  
