@@ -115,9 +115,9 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                 commentData={comments}                
                 logIn={{
                     onLogin: () => {
-                        signIn('google', { callbackUrl: '/' });
+                        signIn('google', { redirect: false });
                     },
-                    signUpLink: 'http://localhost:3000/'
+                    // signUpLink: 'http://localhost:3000/'
                 }}                
                 placeHolder={"Escreva um comentário..."}
                 // customImg='/images/user-avatar.png'
