@@ -1,6 +1,10 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
+if (!process.env.PRIVATE_GOOGLE_CLIENT_ID || !process.env.PRIVATE_GOOGLE_CLIENT_SECRET || !process.env.NEXTAUTH_SECRET) {
+    throw new Error("Missing necessary environment variables for NextAuth configuration.");
+}
+
 const authOptions = {
     providers: [
         GoogleProvider({
@@ -16,15 +20,9 @@ const authOptions = {
         //     clientSecret: process.env.GITHUB_SECRET ?? '',
         // }),    
     ],
-    pages: {
-        signIn: '/auth/signin',
-    },
     secret: process.env.NEXTAUTH_SECRET,
 };
 
-console.log("GOOGLE_CLIENT_ID:", process.env.PRIVATE_GOOGLE_CLIENT_ID);
-console.log("GOOGLE_CLIENT_SECRET:", process.env.PRIVATE_GOOGLE_CLIENT_SECRET);
-console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
 
 const handler = NextAuth(authOptions);
 
