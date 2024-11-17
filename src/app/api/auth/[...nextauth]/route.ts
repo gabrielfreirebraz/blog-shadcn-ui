@@ -22,6 +22,9 @@ const authOptions = {
     secret: process.env.NEXTAUTH_SECRET,
 };
 
+console.log("GOOGLE_CLIENT_ID:", process.env.PRIVATE_GOOGLE_CLIENT_ID);
+console.log("GOOGLE_CLIENT_SECRET:", process.env.PRIVATE_GOOGLE_CLIENT_SECRET);
+console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
 
 const handler = NextAuth(authOptions);
 
