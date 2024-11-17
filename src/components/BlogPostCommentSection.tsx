@@ -115,7 +115,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                 commentData={comments}                
                 logIn={{
                     onLogin: () => {
-                        signIn('google');
+                        signIn('google', { callbackUrl: '/' });
                     },
                     signUpLink: 'http://localhost:3000/'
                 }}                
