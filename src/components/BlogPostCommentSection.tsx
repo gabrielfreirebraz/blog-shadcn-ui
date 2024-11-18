@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from 'react'
-import { signIn, signOut, useSession } from 'next-auth/react';
+import React, { useEffect, useRef, useState } from 'react'
+import { signIn, useSession } from 'next-auth/react';
 import { v4 as uuidv4 } from 'uuid';
 
 // import { CommentSection} from 'react-comments-section'
@@ -15,6 +15,7 @@ const CommentSection = dynamic(() => import('react-comments-section').then(mod =
 });
 
 export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
+    const commentsRef = useRef<HTMLDivElement>(null);
 
     const { data: session, status } = useSession();
 
@@ -53,6 +54,19 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
         } 
     };
 
+    const updateSession = async (user: GoogleUser) => {
+
+        const current_user: CurrentUser | null = { 
+            currentUserId: uuidv4(),
+            currentUserFullName: user?.name ?? '',
+            currentUserImg: user?.image ?? '',
+            currentUserProfile: user?.email ? `mailto:${user?.email}` : ''
+            
+        }
+        setCurrentUser(() => current_user)
+        commentsRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     useEffect(() => {
         
         fetchComments();
@@ -86,26 +100,20 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
 
     
     useEffect(() => {
-
-        if (status === 'authenticated') {            
-            const user: GoogleUser | undefined = session?.user
-
-            const current_user: CurrentUser | null = { 
-                currentUserId: uuidv4(),
-                currentUserFullName: user?.name ?? '',
-                currentUserImg: user?.image ?? '',
-                currentUserProfile: user?.email ? `mailto:${user?.email}` : ''
-                
-            }
-            setCurrentUser(current_user)
+        const user: GoogleUser | undefined = session?.user;
+        console.dir(user);
+        
+        if (status === 'authenticated' && user) {   
+            updateSession(user);            
         }
+        
     },[status])
 
 
     if (error) return <p>{error}</p>;
 
 
-    return <div className='lg:mx-[6%] xl:mx-32 my-20'>
+    return <div ref={commentsRef} className='lg:mx-[6%] xl:mx-32 my-20'>
 
             <CommentSection
                 customNoComment={() => ''}
@@ -120,7 +128,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                         if (result?.error) {
                             console.error('Login failed:', result.error);
                         } else {
-                            console.log('Login successful!');
+                            console.log('Login successful!');                            
                         }
                     },
                     // signUpLink: 'http://localhost:3000/'
