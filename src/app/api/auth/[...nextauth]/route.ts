@@ -11,14 +11,6 @@ const authOptions = {
             clientId: process.env.PRIVATE_GOOGLE_CLIENT_ID ?? '',
             clientSecret: process.env.PRIVATE_GOOGLE_CLIENT_SECRET ?? '',
         }),
-        // FacebookProvider({
-        //     clientId: process.env.FACEBOOK_CLIENT_ID ?? '',
-        //     clientSecret: process.env.FACEBOOK_SECRET ?? '',
-        // }),
-        // GithubProvider({
-        //     clientId: process.env.GITHUB_ID ?? '',
-        //     clientSecret: process.env.GITHUB_SECRET ?? '',
-        // }),    
     ],
     secret: process.env.NEXTAUTH_SECRET,
 };

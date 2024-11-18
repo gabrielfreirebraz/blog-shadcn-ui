@@ -54,7 +54,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
     };
 
     useEffect(() => {
-
+        
         fetchComments();
     }, []);
 
@@ -87,7 +87,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
     
     useEffect(() => {
 
-        if (status === 'authenticated') {
+        if (status === 'authenticated') {            
             const user: GoogleUser | undefined = session?.user
 
             const current_user: CurrentUser | null = { 
@@ -114,8 +114,14 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
                 hrStyle={{ border: 'none' }}                
                 commentData={comments}                
                 logIn={{
-                    onLogin: () => {
-                        signIn('google', { redirect: false });
+                    onLogin: async () => {
+                        const result = await signIn('google', { redirect: false });
+
+                        if (result?.error) {
+                            console.error('Login failed:', result.error);
+                        } else {
+                            console.log('Login successful!');
+                        }
                     },
                     // signUpLink: 'http://localhost:3000/'
                 }}                
