@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { v4 as uuidv4 } from 'uuid';
 
 // import { CommentSection} from 'react-comments-section'
@@ -15,7 +15,7 @@ const CommentSection = dynamic(() => import('react-comments-section').then(mod =
 });
 
 export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
-    const commentsRef = useRef<HTMLDivElement>(null);
+    // const commentsRef = useRef<HTMLDivElement>(null);
 
     const { data: session, status } = useSession();
 
@@ -55,7 +55,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
         } 
     };
 
-    const updateSession = async (user: GoogleUser) => {
+    const updateSession = (user: GoogleUser) => {
 
         const current_user: CurrentUser | null = { 
             currentUserId: uuidv4(),
