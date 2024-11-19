@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { v4 as uuidv4 } from 'uuid';
 
 // import { CommentSection} from 'react-comments-section'
@@ -23,6 +23,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
     const [newComment, setNewComment] = useState<CommentDataLibrary | null>(null);
     const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
     const [error, setError] = useState<string | null>(null);
+    // const [hasScrolled, setHasScrolled] = useState(false);
 
     const fetchComments = async () => {
         try {
@@ -64,7 +65,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
             
         }
         setCurrentUser(() => current_user)
-        commentsRef.current?.scrollIntoView({ behavior: 'smooth' });
+        // setHasScrolled(() => !!commentsRef.current?.scrollIntoView({ behavior: 'smooth' }));
     }
 
     useEffect(() => {
@@ -103,8 +104,9 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
         const user: GoogleUser | undefined = session?.user;
         console.dir(user);
         
-        if (status === 'authenticated' && user) {   
-            updateSession(user);            
+        // if (!hasScrolled && status === 'authenticated') {   
+        if (status === 'authenticated') {   
+            user && updateSession(user); 
         }
         
     },[status])
@@ -113,7 +115,7 @@ export const BlogPostCommentSection = ({ postId }: { postId: string }) => {
     if (error) return <p>{error}</p>;
 
 
-    return <div ref={commentsRef} className='lg:mx-[6%] xl:mx-32 my-20'>
+    return <div className='lg:mx-[6%] xl:mx-32 my-20'>
 
             <CommentSection
                 customNoComment={() => ''}
