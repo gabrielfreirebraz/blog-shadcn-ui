@@ -11,6 +11,20 @@ const nextConfig = {
   redirects: async () => {
     return [];
   },
+  // remove cache da cloudflare para sessao de usuário
+  async headers() {
+    return [
+      {
+        source: '/api/auth/(.*)', 
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, must-revalidate', 
+          },
+        ],
+      },
+    ];
+  },
   // force reload aws vars to build on production
   env: {
     PRIVATE_AWS_ACCESS_KEY_ID: process.env.PRIVATE_AWS_ACCESS_KEY_ID,
