@@ -2,9 +2,9 @@
 
 export const text = `## Por Que Nossa Calculadora é Diferente?
 
-Muitos sites utilizam métodos simplificados e fórmulas genéricas que podem desconsiderar fatores importantes no cálculo do **13º salário**. 
+**Simples e confiável**, esse é nosso objetivo. Muitos sites utilizam métodos simplificados e fórmulas genéricas que podem desconsiderar fatores importantes no cálculo do **13º salário**. 
 Detalhes como deduções específicas por dependentes, faixas salariais progressivas de INSS e IRRF e regras atualizadas da legislação são **frequentemente ignorados**. 
-Isso pode gerar discrepâncias significativas, especialmente em situações mais complexas, resultando em valores que não refletem a realidade do trabalhador. 
+Isso pode gerar discrepâncias significativas, resultando em valores que não refletem a realidade do trabalhador. 
 **Nossa calculadora elimina essas simplificações de cálculo que podem causar inconsistências, nosso objetivo é oferecer resultados precisos, confiáveis e totalmente alinhados com a legislação vigente**.
 
 
