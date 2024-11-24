@@ -6,15 +6,16 @@ interface SelectProps {
   id: string;
   options: { value: string; label: string; selected?: boolean; }[];
   onChange?: (value: string) => void;
-  register?: any; // Para integração opcional com React Hook Form
   error?: string;
 }
 
-const Select: React.FC<SelectProps> = ({ id, options, onChange, register, error }) => {
+const Select: React.FC<SelectProps> = ({ id, options, onChange, error }) => {
+  const optionSelected = options.find((option) => option.selected)?.value ?? options[0]?.value
+  
   return (
     <div>
       <SelectPrimitive.Root 
-        defaultValue={options.find((option) => option.selected)?.value ?? options[0]?.value}
+        defaultValue={optionSelected}
         onValueChange={(value) => {
           if (onChange) {
             onChange(value); 

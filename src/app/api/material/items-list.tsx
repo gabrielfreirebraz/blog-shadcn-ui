@@ -1,4 +1,4 @@
-import { FormCalculadora13 } from "@/components/feature/calculadora/FormCalculadora13";
+import { FormCalculadora13 } from "@/components/feature/calculadora13/FormCalculadora13";
 
 
 export const itemsMaterialList: MaterialPreview[] = [

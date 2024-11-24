@@ -4,14 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { calculateDecimoTerceiro } from "./utils/calculateDecimoTerceiro";
 
 
-type Inputs = {
-    paymentType: string;
-    salaryGross: string;
-    workMonths: string;
-    dependentsNumber: string;
-  }
+
 
 export const FormCalculadora13 = () => {
 
@@ -21,11 +17,15 @@ export const FormCalculadora13 = () => {
         watch,
         setValue,
         formState: { errors },
-      } = useForm<Inputs>()
+      } = useForm<DecimoTerceiroInputs>()
 
-      const onSubmit: SubmitHandler<Inputs> = (data) => {
+      const onSubmit: SubmitHandler<DecimoTerceiroInputs> = (data) => {
 
-        console.log('submited') 	
+        console.log('submited')
+          
+        console.dir(data)
+        const result = calculateDecimoTerceiro(data);
+        console.dir(result)
       }
     
       return (
@@ -44,8 +44,8 @@ export const FormCalculadora13 = () => {
                         <Input
                             id="salaryGross"
                             placeholder="Entre com o salário bruto atual"
-                            {...register("salaryGross", { required: "Salary is required" })}
-                            error={errors.salaryGross?.message}
+                            {...register("salaryGross")}
+                            onValueChange={(value) => setValue("salaryGross", Number(value))}
                             currency 
                         />
                     </div>
@@ -57,23 +57,21 @@ export const FormCalculadora13 = () => {
                         <Input
                             id="workMonths"
                             placeholder="Entre com o total de meses trabalhados até o momento"
-                            {...register("workMonths", { required: "Salary is required" })}
-                            error={errors.salaryGross?.message}
+                            {...register("workMonths")}
+                            onValueChange={(value) => setValue("workMonths", Number(value))}
                             onlyNumbers
                         />                
                     </div>
 
-
-
                     <div>
                         <label htmlFor="dependentsNumber" className="block text-sm font-medium text-gray-700">
-                        Número de dependentes (*)
+                        Número de dependentes
                         </label>
                         <Input
                             id="dependentsNumber"
                             placeholder="Entre com o número de dependentes"
-                            {...register("dependentsNumber", { required: "Salary is required" })}
-                            error={errors.salaryGross?.message}
+                            {...register("dependentsNumber")}
+                            onValueChange={(value) => setValue("dependentsNumber", Number(value))}
                             defaultValue={0}
                             onlyNumbers
                         />  
@@ -85,6 +83,7 @@ export const FormCalculadora13 = () => {
                         Tipo de pagamento
                         </label>
                         <Select
+                            {...register("paymentType")}
                             id="paymentType"
                             options={[
                                 { value: "unique", label: "Única", selected: true },
@@ -94,8 +93,6 @@ export const FormCalculadora13 = () => {
                             onChange={(value) => setValue("paymentType", value)}
                             />
                     </div>
-
-
 
                     <Button type="submit" className="w-full">
                         Calcular

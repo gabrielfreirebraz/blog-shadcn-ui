@@ -5,9 +5,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   onlyNumbers?: boolean;
   currency?: boolean;
+  onValueChange?: (value: string | number) => void;
 }
 
-const Input: React.FC<InputProps> = ({ className, error, onlyNumbers, currency, onInput, ...props }) => {
+const Input: React.FC<InputProps> = ({ className, error, onlyNumbers, currency, onInput, onValueChange, ...props }) => {
 
   const formatToBRL = (value: string): string => {
     const numericValue = value.replace(/\D/g, ""); 
@@ -17,14 +18,22 @@ const Input: React.FC<InputProps> = ({ className, error, onlyNumbers, currency, 
     });
     return formattedValue;
   };
-
+  const unformatBRL = (value: string): number => {
+    return Number(value.replace(/\D/g, "")) / 100;
+  };
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+
     if (onlyNumbers) {
-      event.currentTarget.value = event.currentTarget.value.replace(/\D/g, "");
-    
+      input.value = input.value.replace(/\D/g, ""); // Apenas números
     } else if (currency) {
-      const input = event.currentTarget;
-      input.value = formatToBRL(input.value); 
+      input.value = formatToBRL(input.value); // Formatar como BRL
+    }
+    
+    if (onValueChange) {
+      const value = currency ? unformatBRL(input.value) : input.value;
+      onValueChange(value); 
+
     }
     if (onInput) {
       onInput(event); 
