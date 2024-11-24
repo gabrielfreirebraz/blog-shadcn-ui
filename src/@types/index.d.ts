@@ -51,6 +51,7 @@ interface MaterialPreview {
     enable: boolean;
     category: MaterialCategory;
     downloadUrl?: string;
+    formComponent?: React.ElementType;
 }
 
 type MaterialCategory = 'download' | 'form'

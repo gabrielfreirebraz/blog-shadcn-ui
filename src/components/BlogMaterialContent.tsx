@@ -7,7 +7,10 @@ import Link from "next/link";
 
 
 export const BlogMaterialContent = ({ material }: { material: MaterialPreview}) => {
-  return material.category === 'download' && (
+  
+  if (material.category === 'download') {
+  
+    return (
       <div className="mx-auto mb-10 lg:mt-20 break-words prose-h1:text-4xl prose-h1:font-bold dark:prose-invert">
         
         <div className="max-w-4xl mx-auto py-6 space-y-4">
@@ -33,5 +36,12 @@ export const BlogMaterialContent = ({ material }: { material: MaterialPreview}) 
             
         </div>
       </div>
-  );
+  
+    );
+
+  } else if (material.category === 'form') {
+
+    const FormComponent = material.formComponent;
+    return FormComponent ? <FormComponent /> : null;
+  }
 };

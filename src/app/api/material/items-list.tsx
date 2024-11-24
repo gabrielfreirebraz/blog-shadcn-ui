@@ -1,3 +1,4 @@
+import { FormCalculadora13 } from "@/components/feature/calculadora/FormCalculadora13";
 
 
 export const itemsMaterialList: MaterialPreview[] = [
@@ -7,8 +8,9 @@ export const itemsMaterialList: MaterialPreview[] = [
       description: 'Disponibilizamos uma calculadora de décimo terceiro salário para ajudá-lo a simular seus ganhos de forma rápida e prática. Preencha o formulário e saiba o valor exato que receberá, ideal para planejamento financeiro e controle dos gastos de fim de ano.',
       dateRef: `2024-11-10`,
       image: { src: '/images/calculadora-13.webp', alt: 'Imagem de calculadora de décimo terceiro salário' },
-      enable: false,
-      category: 'form'
+      enable: true,
+      category: 'form',
+      formComponent: FormCalculadora13, 
     },
     {
       link: 'material-de-apoio/planilha/gastos-mensais',
