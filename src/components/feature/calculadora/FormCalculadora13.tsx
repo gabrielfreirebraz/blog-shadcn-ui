@@ -2,11 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 
 type Inputs = {
-    salaryGross: string
+    paymentType: string;
+    salaryGross: string;
+    workMonths: string;
+    dependentsNumber: string;
   }
 
 export const FormCalculadora13 = () => {
@@ -15,6 +19,7 @@ export const FormCalculadora13 = () => {
         register,
         handleSubmit,
         watch,
+        setValue,
         formState: { errors },
       } = useForm<Inputs>()
 
@@ -35,49 +40,68 @@ export const FormCalculadora13 = () => {
                 <Input
                     id="salaryGross"
                     placeholder="Entre com o salário bruto atual"
-                    register={register}
+                    {...register("salaryGross", { required: "Salary is required" })}
                     error={errors.salaryGross?.message}
-                    requiredMessage="Required"
                 />
             </div>
 
             <div>
-                <label htmlFor="salaryGross" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="workMonths" className="block text-sm font-medium text-gray-700">
                 Meses trabalhados
                 </label>
                 <Input
                     id="workMonths"
                     placeholder="Entre com o total de meses trabalhados até o momento"
-                    register={register}
+                    {...register("workMonths", { required: "Salary is required" })}
                     error={errors.salaryGross?.message}
-                    requiredMessage="Required"
-                />
+                />                
             </div>
 
             <div>
-                <label htmlFor="salaryGross" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="paymentType" className="block text-sm font-medium text-gray-700">
                 Tipo de pagamento
                 </label>
+                {/* <Select
+                    id="paymentType"
+                    options={[
+                    { value: "unique", label: "Única" },
+                    { value: "first", label: "Primeira" },
+                    { value: "second", label: "Segunda" },
+                    ]}
+                    register={register}
+                    error={errors.paymentType?.message}
+                    requiredMessage="Job role is required"
+                /> */}
+                <Select
+                    id="paymentType"
+                    options={[
+                        { value: "unique", label: "Única" },
+                        { value: "first", label: "Primeira" },
+                        { value: "second", label: "Segunda" },
+                        ]}
+                    // onChange={(value) => setValue("paymentType", value)}
+                    />
+{/* 
                 <Input
                     id="paymentType"
                     placeholder="Entre com o tipo de pagamento"
                     register={register}
                     error={errors.salaryGross?.message}
                     requiredMessage="Required"
-                />
+                /> */}
             </div>
 
             <div>
-                <label htmlFor="salaryGross" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="dependentsNumber" className="block text-sm font-medium text-gray-700">
                 Número de dependentes
                 </label>
                 <Input
                     id="dependentsNumber"
                     placeholder="Entre com o número de dependentes"
-                    register={register}
+                    {...register("dependentsNumber", { required: "Salary is required" })}
                     error={errors.salaryGross?.message}
-                    requiredMessage="Required"
-                />
+                />  
+             
             </div>
 
 

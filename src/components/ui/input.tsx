@@ -1,29 +1,20 @@
 import React from "react";
+import { cn } from "@/lib/utils"; // Função utilitária do ShadCN
 
-interface InputProps {
-  id: string;
-  placeholder?: string;
-  register: any;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
-  requiredMessage?: string;
 }
 
-const Input: React.FC<InputProps> = ({
-  id,
-  placeholder = "",
-  register,
-  error,
-  requiredMessage,
-}) => {
+const Input: React.FC<InputProps> = ({ className, error, ...props }) => {
   return (
     <div>
       <input
-        id={id}
-        {...register(id, { required: requiredMessage })}
-        placeholder={placeholder}
-        className={`mt-1 block w-full px-3 py-2 border ${
-          error ? "border-red-500" : "border-gray-300"
-        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+        {...props}
+        className={cn(
+          "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+          error ? "border-red-500" : "border-gray-300",
+          className
+        )}
       />
       {error && <span className="text-sm text-red-500">{error}</span>}
     </div>
