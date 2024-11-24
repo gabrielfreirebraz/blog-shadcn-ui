@@ -2,7 +2,7 @@
 
 export const text = `## Por Que Nossa Calculadora é Diferente?
 
-**Simples e confiável**, esse é nosso objetivo. Muitos sites utilizam métodos simplificados e fórmulas genéricas que podem desconsiderar fatores importantes no cálculo do **13º salário**. 
+**Simples e confiável**, esse é nosso objetivo. Muitos sites utilizam métodos genéricos e simplificados de fórmulas que podem desconsiderar fatores importantes no cálculo do **13º salário**. 
 Detalhes como deduções específicas por dependentes, faixas salariais progressivas de INSS e IRRF e regras atualizadas da legislação são **frequentemente ignorados**. 
 Isso pode gerar discrepâncias significativas, resultando em valores que não refletem a realidade do trabalhador. 
 **Nossa calculadora elimina essas simplificações de cálculo que podem causar inconsistências, nosso objetivo é oferecer resultados precisos, confiáveis e totalmente alinhados com a legislação vigente**.
@@ -15,7 +15,7 @@ conta bancária**. Utilizamos a legislação vigente atualizada e consideramos t
 descontos aplicados na segunda parcela.
 
 **Como calculamos o 13º salário?**
-1. Cálculo do Salário Bruto Proporcional:
+1. **Cálculo do Salário Bruto Proporcional:**
 
 - Dividimos o salário bruto anual por 12 meses e multiplicamos pelo número de meses trabalhados no ano.
 - Isso representa o valor bruto proporcional ao qual o trabalhador tem direito.

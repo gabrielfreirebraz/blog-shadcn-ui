@@ -2,15 +2,7 @@ export const calculateDecimoTerceiro = ({
   salaryGross,
   workMonths,
   dependentsNumber = 0,
-}: DecimoTerceiroInputs): {
-  primeiraParcela: number;
-  segundaParcela: number;
-  totalBruto: number;
-  totalLiquido: number,
-  descontosTotais: number;
-  inss: number;
-  ir: number;
-} => {
+}: DecimoTerceiroInputs): DecimoTerceiroResult => {
   if (workMonths < 1 || workMonths > 12) {
     throw new Error("A quantidade de meses trabalhados deve estar entre 1 e 12.");
   }
@@ -23,6 +15,7 @@ export const calculateDecimoTerceiro = ({
 
   // Cálculo do INSS sobre o bruto proporcional
   let inss = 0;
+  let inssReferencePercent = 0; // Percentual efetivo do INSS
   const inssFaixas = [
     { limite: 1320.0, aliquota: 0.075 }, // 7,5%
     { limite: 2571.29, aliquota: 0.09 }, // 9%
@@ -35,6 +28,7 @@ export const calculateDecimoTerceiro = ({
     if (salarioRestante > 0) {
       const faixaAplicavel = Math.min(faixa.limite, salarioRestante);
       inss += faixaAplicavel * faixa.aliquota;
+      inssReferencePercent = faixa.aliquota * 100;
       salarioRestante -= faixaAplicavel;
     }
   }
@@ -47,6 +41,7 @@ export const calculateDecimoTerceiro = ({
 
   // Cálculo do IRRF corrigido
   let ir = 0;  
+  let irReferencePercent = 0;
   let salarioRestanteIR = baseIR;
 
   const irFaixas = [
@@ -61,6 +56,7 @@ export const calculateDecimoTerceiro = ({
     if (salarioRestanteIR > 0) {
       const faixaAplicavel = Math.min(salarioRestanteIR, faixa.limite);
       ir += faixaAplicavel * faixa.aliquota - faixa.deducao;
+      irReferencePercent = faixa.aliquota * 100;
       salarioRestanteIR -= faixaAplicavel;
     }
   }
@@ -83,6 +79,8 @@ export const calculateDecimoTerceiro = ({
     totalLiquido: parseFloat(totalLiquido.toFixed(2)),
     descontosTotais: parseFloat(descontosTotais.toFixed(2)),
     inss: parseFloat(inss.toFixed(2)),
+    inssPercent: parseFloat(inssReferencePercent.toFixed(2)),
     ir: parseFloat(ir.toFixed(2)),
+    irPercent: parseFloat(irReferencePercent.toFixed(2)),
   };
 };
