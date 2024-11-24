@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { calculateDecimoTerceiro } from "./utils/calculateDecimoTerceiro";
-
-
+import Markdown from "react-markdown";
+import { text } from "./utils/text";
 
 
 export const FormCalculadora13 = () => {
@@ -98,6 +98,10 @@ export const FormCalculadora13 = () => {
                         Calcular
                     </Button>
                 </form>
+
+                <div className="prose md:prose-md dark:prose-invert m-auto mt-20 mb-10">
+                    <Markdown>{text}</Markdown>      
+                </div>
             </div>
         </div>
         
