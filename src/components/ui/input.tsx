@@ -4,13 +4,27 @@ import { cn } from "@/lib/utils"; // Função utilitária do ShadCN
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   onlyNumbers?: boolean;
+  currency?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ className, error, onlyNumbers,
-  onInput, ...props }) => {
+const Input: React.FC<InputProps> = ({ className, error, onlyNumbers, currency, onInput, ...props }) => {
+
+  const formatToBRL = (value: string): string => {
+    const numericValue = value.replace(/\D/g, ""); 
+    const formattedValue = (Number(numericValue) / 100).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+    return formattedValue;
+  };
+
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
     if (onlyNumbers) {
       event.currentTarget.value = event.currentTarget.value.replace(/\D/g, "");
+    
+    } else if (currency) {
+      const input = event.currentTarget;
+      input.value = formatToBRL(input.value); 
     }
     if (onInput) {
       onInput(event); 

@@ -5,14 +5,21 @@ import React from "react";
 interface SelectProps {
   id: string;
   options: { value: string; label: string; selected?: boolean; }[];
+  onChange?: (value: string) => void;
   register?: any; // Para integração opcional com React Hook Form
   error?: string;
 }
 
-const Select: React.FC<SelectProps> = ({ id, options, register, error }) => {
+const Select: React.FC<SelectProps> = ({ id, options, onChange, register, error }) => {
   return (
     <div>
-      <SelectPrimitive.Root defaultValue={`unique`}>
+      <SelectPrimitive.Root 
+        defaultValue={options.find((option) => option.selected)?.value ?? options[0]?.value}
+        onValueChange={(value) => {
+          if (onChange) {
+            onChange(value); 
+          }
+        }}>
         <SelectPrimitive.Trigger
           id={id}
           aria-label={id}
