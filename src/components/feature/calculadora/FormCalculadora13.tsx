@@ -54,6 +54,7 @@ export const FormCalculadora13 = () => {
                     placeholder="Entre com o total de meses trabalhados até o momento"
                     {...register("workMonths", { required: "Salary is required" })}
                     error={errors.salaryGross?.message}
+                    onlyNumbers
                 />                
             </div>
 
@@ -61,17 +62,6 @@ export const FormCalculadora13 = () => {
                 <label htmlFor="paymentType" className="block text-sm font-medium text-gray-700">
                 Tipo de pagamento
                 </label>
-                {/* <Select
-                    id="paymentType"
-                    options={[
-                    { value: "unique", label: "Única" },
-                    { value: "first", label: "Primeira" },
-                    { value: "second", label: "Segunda" },
-                    ]}
-                    register={register}
-                    error={errors.paymentType?.message}
-                    requiredMessage="Job role is required"
-                /> */}
                 <Select
                     id="paymentType"
                     options={[
@@ -81,14 +71,6 @@ export const FormCalculadora13 = () => {
                         ]}
                     // onChange={(value) => setValue("paymentType", value)}
                     />
-{/* 
-                <Input
-                    id="paymentType"
-                    placeholder="Entre com o tipo de pagamento"
-                    register={register}
-                    error={errors.salaryGross?.message}
-                    requiredMessage="Required"
-                /> */}
             </div>
 
             <div>
@@ -100,6 +82,7 @@ export const FormCalculadora13 = () => {
                     placeholder="Entre com o número de dependentes"
                     {...register("dependentsNumber", { required: "Salary is required" })}
                     error={errors.salaryGross?.message}
+                    onlyNumbers
                 />  
              
             </div>
