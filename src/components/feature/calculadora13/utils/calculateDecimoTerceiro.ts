@@ -39,8 +39,28 @@ export const calculateDecimoTerceiro = ({
   // Base de cálculo para o IRRF (após INSS e dependentes)
   const baseIR = proportionalSalary - inss - perDependents;
 
+  // Verificar se a baseIR ficou negativa ou zero
+  if (baseIR <= 0) {
+    // Caso baseIR <= 0, não há IRRF, e a segunda parcela é ajustada
+    const descontosTotais = inss;
+    const segundaParcela = primeiraParcela - descontosTotais;
+    const totalLiquido = primeiraParcela + segundaParcela;
+
+    return {
+      primeiraParcela: parseFloat(primeiraParcela.toFixed(2)),
+      segundaParcela: parseFloat(segundaParcela.toFixed(2)),
+      totalBruto: parseFloat(proportionalSalary.toFixed(2)),
+      totalLiquido: parseFloat(totalLiquido.toFixed(2)),
+      descontosTotais: parseFloat(descontosTotais.toFixed(2)),
+      inss: parseFloat(inss.toFixed(2)),
+      inssPercent: parseFloat(inssReferencePercent.toFixed(2)),
+      ir: 0,
+      irPercent: 0,
+    };
+  }
+
   // Cálculo do IRRF corrigido
-  let ir = 0;  
+  let ir = 0;
   let irReferencePercent = 0;
   let salarioRestanteIR = baseIR;
 
@@ -53,15 +73,18 @@ export const calculateDecimoTerceiro = ({
   ];
 
   for (const faixa of irFaixas) {
+    if (salarioRestanteIR > faixa.limite) {
+      continue; // Ignorar faixas que não são aplicáveis
+    }
+
     if (salarioRestanteIR > 0) {
-      const faixaAplicavel = Math.min(salarioRestanteIR, faixa.limite);
-      ir += faixaAplicavel * faixa.aliquota - faixa.deducao;
+      ir = salarioRestanteIR * faixa.aliquota - faixa.deducao;
       irReferencePercent = faixa.aliquota * 100;
-      salarioRestanteIR -= faixaAplicavel;
+      break;
     }
   }
 
-  ir = Math.max(ir, 0); // evita ser negativo
+  ir = Math.max(ir, 0); // Evita IR negativo
 
   // Total de descontos aplicados na segunda parcela
   const descontosTotais = inss + ir;
