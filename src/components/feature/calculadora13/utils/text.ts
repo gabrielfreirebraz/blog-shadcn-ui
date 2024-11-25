@@ -7,7 +7,7 @@ Detalhes como deduções específicas por dependentes, faixas salariais progress
 Isso pode gerar discrepâncias significativas, resultando em valores que não refletem a realidade do trabalhador. 
 **Nossa calculadora elimina essas simplificações de cálculo que podem causar inconsistências, nosso objetivo é oferecer resultados precisos, confiáveis e totalmente alinhados com a legislação vigente**.
 
-Simplicidade é o foco, não gostamos de complicar. Veja **quanto de dinheiro** você vai receber e **quando vai receber esse dinheiro**. É isso que importa. Não estamos consultando um holerite ou tabela do governo aqui.
+Simplicidade é o foco, não gostamos de complicar. Veja **quanto de dinheiro** você vai receber e **quando vai receber esse dinheiro**. É isso que importa.
 
 
 ## Como o Cálculo do 13º Salário é Feito na Nossa Calculadora?

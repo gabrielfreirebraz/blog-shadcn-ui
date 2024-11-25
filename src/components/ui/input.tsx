@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils"; // Função utilitária do ShadCN
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: string;
+  error?: string | null;
   onlyNumbers?: boolean;
   currency?: boolean;
   onValueChange?: (value: string | number) => void;

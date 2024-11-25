@@ -51,8 +51,9 @@ export const FormCalculadora13 = () => {
                             <Input
                                 id="salaryGross"
                                 placeholder="Entre com o salário bruto atual"
-                                {...register("salaryGross")}
+                                {...register("salaryGross", { required: 'O salário bruto é obrigatório' })}
                                 onValueChange={(value) => setValue("salaryGross", Number(value))}
+                                error={errors.salaryGross?.message ?? null}
                                 currency 
                             />
                         </div>
@@ -64,8 +65,19 @@ export const FormCalculadora13 = () => {
                             <Input
                                 id="workMonths"
                                 placeholder="Entre com o total de meses trabalhados até o momento"
-                                {...register("workMonths")}
+                                {...register("workMonths", { 
+                                    required: "O total de meses trabalhados é obrigatório",
+                                    min: {
+                                      value: 1,
+                                      message: "O valor deve ser entre 1 e 12",
+                                    },
+                                    max: {
+                                      value: 12,
+                                      message: "O valor deve ser entre 1 e 12",
+                                    },
+                                 })}
                                 onValueChange={(value) => setValue("workMonths", Number(value))}
+                                error={errors.workMonths?.message ?? null}
                                 onlyNumbers
                             />                
                         </div>
@@ -123,7 +135,6 @@ export const FormCalculadora13 = () => {
                                 Valor líquido a receber até <b>20 de dezembro</b> da <b>segunda parcela</b>: <br/>
                                 <strong className="text-4xl">{formatToBRL(result.segundaParcela)}</strong>.
                             </p>}
-
                             
 
                             {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8 py-8">
@@ -142,15 +153,21 @@ export const FormCalculadora13 = () => {
                             </p>}
 
 
-
-                            <p className="text-lg text-gray-600 px-8">
-                                Total de impostos:<br/> 
-                                <strong className="text-2xl">{formatToBRL(result.descontosTotais)}</strong>
-                                <br/><br/>
-                                • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
-                                <br/>
-                                • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
-                            </p></>}
+                            {getValues('paymentType') === 'first' ? 
+                                <p className="text-lg text-gray-600 px-8">
+                                    Total de impostos:<br/> 
+                                    <strong className="text-2xl">{formatToBRL(0)}</strong>
+                                </p>
+                                : 
+                                <p className="text-lg text-gray-600 px-8">
+                                    Total de impostos:<br/> 
+                                    <strong className="text-2xl">{formatToBRL(result.descontosTotais)}</strong>
+                                    <br/><br/>
+                                    • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
+                                    <br/>
+                                    • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
+                                </p>}
+                            </>}
                     </div>
                 </div>
 
