@@ -20,8 +20,14 @@ export const FormCalculadora13 = () => {
         handleSubmit,
         watch,
         setValue,
+        getValues,
         formState: { errors },
-      } = useForm<DecimoTerceiroInputs>()
+      } = useForm<DecimoTerceiroInputs>({
+        defaultValues: {
+            paymentType: 'unique',
+            dependentsNumber: 0
+        },
+      })
 
       const onSubmit: SubmitHandler<DecimoTerceiroInputs> = (data) => {
 
@@ -103,24 +109,48 @@ export const FormCalculadora13 = () => {
 
                     <div className="">
                         {result && <>
-                        <p className="text-lg text-gray-600 px-8">
-                            Valor líquido a receber até 20 de dezembro: <br/>
-                            <strong className="text-4xl">{formatToBRL(result.totalLiquido)}</strong>.
-                        </p>
-                        
-                        <p className="text-lg text-gray-600 px-8 py-8">
-                            Valor bruto: <br/> 
-                            <strong className="text-2xl">{formatToBRL(result.totalBruto)}</strong>
-                        </p>
+                            {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
+                                Valor líquido a receber até <b>20 de dezembro</b> em <b>parcela única</b>: <br/>
+                                <strong className="text-4xl">{formatToBRL(result.totalLiquido)}</strong>.
+                            </p>}
 
-                        <p className="text-lg text-gray-600 px-8">
-                            Total de impostos:<br/> 
-                            <strong className="text-2xl">{formatToBRL(result.descontosTotais)}</strong>
-                            <br/><br/>
-                            • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
-                            <br/>
-                            • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
-                        </p></>}
+                            {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8">
+                                Valor líquido a receber até <b>30 de novembro</b> da <b>primeira parcela</b>: <br/>
+                                <strong className="text-4xl">{formatToBRL(result.primeiraParcela)}</strong>.
+                            </p>}
+
+                            {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8">
+                                Valor líquido a receber até <b>20 de dezembro</b> da <b>segunda parcela</b>: <br/>
+                                <strong className="text-4xl">{formatToBRL(result.segundaParcela)}</strong>.
+                            </p>}
+
+                            
+
+                            {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8 py-8">
+                                Valor bruto: <br/> 
+                                <strong className="text-2xl">{formatToBRL(result.totalBruto)}</strong>
+                            </p>}
+
+                            {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8 py-8">
+                                Valor bruto: <br/> 
+                                <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
+                            </p>}
+
+                            {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8 py-8">
+                                Valor bruto: <br/> 
+                                <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
+                            </p>}
+
+
+
+                            <p className="text-lg text-gray-600 px-8">
+                                Total de impostos:<br/> 
+                                <strong className="text-2xl">{formatToBRL(result.descontosTotais)}</strong>
+                                <br/><br/>
+                                • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
+                                <br/>
+                                • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
+                            </p></>}
                     </div>
                 </div>
 
