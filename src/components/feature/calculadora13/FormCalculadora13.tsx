@@ -42,7 +42,7 @@ export const FormCalculadora13 = () => {
                 <h1 className="mb-5">Calculadora de Décimo terceiro salário<br/> (Valor líquido CLT)</h1>
                 <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de décimo terceiro esse ano e comece seus planos.</p>
             
-                <div className="flex flex-column">
+                <div className="flex flex-col md:flex-row">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md">
                         <div>
                             <label htmlFor="salaryGross" className="block text-sm font-medium text-gray-700">
@@ -118,36 +118,35 @@ export const FormCalculadora13 = () => {
                         </Button>
                     </form>
 
-
-                    <div className="">
+                    <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
                             {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
                                 Valor líquido a receber até <b>20 de dezembro</b> em <b>parcela única</b>: <br/>
-                                <strong className="text-4xl">{formatToBRL(result.totalLiquido)}</strong>.
+                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.totalLiquido)}</strong>.
                             </p>}
 
                             {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8">
                                 Valor líquido a receber até <b>30 de novembro</b> da <b>primeira parcela</b>: <br/>
-                                <strong className="text-4xl">{formatToBRL(result.primeiraParcela)}</strong>.
+                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.primeiraParcela)}</strong>.
                             </p>}
 
                             {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8">
                                 Valor líquido a receber até <b>20 de dezembro</b> da <b>segunda parcela</b>: <br/>
-                                <strong className="text-4xl">{formatToBRL(result.segundaParcela)}</strong>.
+                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.segundaParcela)}</strong>.
                             </p>}
                             
 
-                            {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8 py-8">
+                            {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8 py-6">
                                 Valor bruto: <br/> 
                                 <strong className="text-2xl">{formatToBRL(result.totalBruto)}</strong>
                             </p>}
 
-                            {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8 py-8">
+                            {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8 py-6">
                                 Valor bruto: <br/> 
                                 <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
                             </p>}
 
-                            {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8 py-8">
+                            {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8 py-6">
                                 Valor bruto: <br/> 
                                 <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
                             </p>}
