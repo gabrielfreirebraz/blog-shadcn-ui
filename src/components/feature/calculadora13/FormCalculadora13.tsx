@@ -121,7 +121,7 @@ export const FormCalculadora13 = () => {
                     <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
                             {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>20 de dezembro</b> em <b>parcela única</b>: <br/>
+                                Valor líquido a receber até <b>30 de novembro</b> em <b>parcela única</b>: <br/>
                                 <strong className="text-4xl leading-relaxed">{formatToBRL(result.totalLiquido)}</strong>.
                             </p>}
 
@@ -156,6 +156,10 @@ export const FormCalculadora13 = () => {
                                 <p className="text-lg text-gray-600 px-8">
                                     Total de impostos:<br/> 
                                     <strong className="text-2xl">{formatToBRL(0)}</strong>
+                                    <br/><br/>
+                                    • <strong>INSS:</strong> {`-`}
+                                    <br/>
+                                    • <strong>IRRF:</strong> {`-`}
                                 </p>
                                 : 
                                 <p className="text-lg text-gray-600 px-8">
