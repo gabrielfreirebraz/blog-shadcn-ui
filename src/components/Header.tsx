@@ -26,6 +26,7 @@ import {
 import { SiMicrosoftexcel } from "react-icons/si";
 import { RiCalculatorLine } from "react-icons/ri";
 import { menuCategoryList } from "@/app/api/categoria/menu-list";
+import { useTheme } from "next-themes";
 
 
 const menuItems: MenuItem[] = [
@@ -97,11 +98,13 @@ export const Navigation: FunctionComponent = () => {
 };
 
 export const Header: FunctionComponent = () => {
+  const { resolvedTheme } = useTheme();
+
   return (
     <section className="flex items-center justify-between mt-8 md:mt-16 mb-12">
       <Link href="/" className="md:-mt-8">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-          <Image alt={`Logo Bolso Extra`} src={`/images/bolsoextra.png`} height={100} width={150} />
+          <Image alt={`Logo Bolso Extra`} src={resolvedTheme === "dark" ? `/images/bolsoextra-darkmode.png`: `/images/bolsoextra.png`} height={100} width={150} />
         </h1>
       </Link>
       <Navigation />
