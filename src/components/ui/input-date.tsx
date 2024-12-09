@@ -18,6 +18,7 @@ const InputDate: React.FC<InputDateProps> = ({
   max,
   required = false,
   placeholder,
+  ...props
 }) => {
   return (
     <input
@@ -29,14 +30,7 @@ const InputDate: React.FC<InputDateProps> = ({
       max={max}
       required={required}
       placeholder={placeholder}
-      style={{
-        padding: "0.5rem",
-        fontSize: "1rem",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-        width: "100%",
-        marginBottom: "1rem",
-      }}
+      className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
     />
   );
 };

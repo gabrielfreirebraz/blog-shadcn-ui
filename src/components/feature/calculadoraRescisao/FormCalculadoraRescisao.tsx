@@ -65,15 +65,13 @@ export const FormCalculadoraRescisao = () => {
                             Data de admissão / contratação (*)
                             </label>
                             <InputDate
-                                id="start-date"
-                                value={startDate}
-                                // onChange={(e) => setStartDate(e.target.value)}
-                                min="2023-01-01"
-                                max="2024-12-31"
+                                id="startDate"
+                                {...register("startDate")}
+                                onChange={(value) => setValue("startDate", (value))}
+                                max="2024-12-08" // date now
                                 required
                                 placeholder="Selecione a data de início"
                             />
-
                         </div>
 
                         <div>
@@ -81,15 +79,13 @@ export const FormCalculadoraRescisao = () => {
                             Data de afastamento / demissão (*)
                             </label>
                             <InputDate
-                                id="end-date"
-                                value={startDate}
-                                // onChange={(e) => setStartDate(e.target.value)}
-                                min="2023-01-01"
-                                max="2024-12-31"
+                                id="endDate"
+                                {...register("endDate")}
+                                onChange={(value) => setValue("endDate", (value))}
+                                min="2024-12-08" // date now
                                 required
-                                placeholder="Selecione a data de início"
+                                placeholder="Selecione a data de término"
                             />
-
                         </div>
 
                         <div>
@@ -109,7 +105,7 @@ export const FormCalculadoraRescisao = () => {
 
                         <div>
                             <label htmlFor="reasonType" className="block text-sm font-medium text-gray-700">
-                            Motivo
+                            Motivo (*)
                             </label>
                             <Select
                                 {...register("reasonType")}
@@ -128,7 +124,7 @@ export const FormCalculadoraRescisao = () => {
 
                         <div>
                             <label htmlFor="noticePeriod" className="block text-sm font-medium text-gray-700">
-                            Aviso Prévio
+                            Aviso Prévio (*)
                             </label>
                             <Select
                                 {...register("noticePeriod")}
