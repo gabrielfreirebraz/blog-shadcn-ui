@@ -2,16 +2,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputDate } from "@/components/ui/input-date";
 import { Select } from "@/components/ui/select";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { calculateDecimoTerceiro } from "./useCases/calculateDecimoTerceiro";
 import Markdown from "react-markdown";
 import { text } from "./utils/description";
 import { useState } from "react";
 import { formatToBRL } from "@/utils/formatToBRL";
+import { calculateRescisao } from "./useCases/calculateRescisao";
 
 
-export const FormCalculadora13 = () => {
+export const FormCalculadoraRescisao = () => {
     const [result, setResult] = useState<DecimoTerceiroResult>();
 
 
@@ -24,14 +25,15 @@ export const FormCalculadora13 = () => {
         formState: { errors },
       } = useForm<DecimoTerceiroInputs>({
         defaultValues: {
-            paymentType: 'unique',
+            reasonType: 'no_just_cause',
+            noticePeriod: 'worked',
             dependentsNumber: 0
         },
       })
 
       const onSubmit: SubmitHandler<DecimoTerceiroInputs> = (data) => {
 
-        setResult(() => calculateDecimoTerceiro(data) );
+        setResult(() => calculateRescisao(data) );
       }
     
       return (
@@ -39,8 +41,8 @@ export const FormCalculadora13 = () => {
         <div className="mx-auto mb-10 lg:mt-20 break-words prose-h1:text-4xl prose-h1:font-bold dark:prose-invert">
         
             <div className="max-w-4xl mx-auto py-6">
-                <h1 className="mb-5">Calculadora de Décimo terceiro salário<br/> (Valor líquido CLT)</h1>
-                <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de décimo terceiro esse ano e comece seus planos.</p>
+                <h1 className="mb-5">Calculadora de Rescisão<br/> (Valor líquido CLT)</h1>
+                <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de rescisão e comece seus novos planos.</p>
             
                 <div className="flex flex-col md:flex-row">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md">
@@ -59,27 +61,35 @@ export const FormCalculadora13 = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="workMonths" className="block text-sm font-medium text-gray-700">
-                            Meses trabalhados (*)
+                            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
+                            Data de admissão / contratação (*)
                             </label>
-                            <Input
-                                id="workMonths"
-                                placeholder="Entre com o total de meses trabalhados até o momento"
-                                {...register("workMonths", { 
-                                    required: "O total de meses trabalhados é obrigatório",
-                                    min: {
-                                      value: 1,
-                                      message: "O valor deve ser entre 1 e 12",
-                                    },
-                                    max: {
-                                      value: 12,
-                                      message: "O valor deve ser entre 1 e 12",
-                                    },
-                                 })}
-                                onValueChange={(value) => setValue("workMonths", Number(value))}
-                                error={errors.workMonths?.message ?? null}
-                                onlyNumbers
-                            />                
+                            <InputDate
+                                id="start-date"
+                                value={startDate}
+                                // onChange={(e) => setStartDate(e.target.value)}
+                                min="2023-01-01"
+                                max="2024-12-31"
+                                required
+                                placeholder="Selecione a data de início"
+                            />
+
+                        </div>
+
+                        <div>
+                            <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
+                            Data de afastamento / demissão (*)
+                            </label>
+                            <InputDate
+                                id="end-date"
+                                value={startDate}
+                                // onChange={(e) => setStartDate(e.target.value)}
+                                min="2023-01-01"
+                                max="2024-12-31"
+                                required
+                                placeholder="Selecione a data de início"
+                            />
+
                         </div>
 
                         <div>
@@ -98,18 +108,38 @@ export const FormCalculadora13 = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="paymentType" className="block text-sm font-medium text-gray-700">
-                            Tipo de pagamento
+                            <label htmlFor="reasonType" className="block text-sm font-medium text-gray-700">
+                            Motivo
                             </label>
                             <Select
-                                {...register("paymentType")}
-                                id="paymentType"
+                                {...register("reasonType")}
+                                id="reasonType"
                                 options={[
-                                    { value: "unique", label: "Única", selected: true },
-                                    { value: "first", label: "Primeira" },
-                                    { value: "second", label: "Segunda" },
+                                    { value: "common_agreement", label: "Demissão de comum acordo" },
+                                    { value: "no_just_cause", label: "Dispensa sem justa causa", selected: true },
+                                    { value: "with_just_cause", label: "Dispensa com justa causa" },
+                                    { value: "resignation", label: "Pedido de demissão" },
+                                    { value: "end_contract_on_time", label: "Encerramento de contrato de experiência no prazo" },
+                                    { value: "end_contract_before_time", label: "Encerramento de contrato de experiência antes prazo" }
                                     ]}
-                                onChange={(value) => setValue("paymentType", value)}
+                                onChange={(value) => setValue("reasonType", value)}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="noticePeriod" className="block text-sm font-medium text-gray-700">
+                            Aviso Prévio
+                            </label>
+                            <Select
+                                {...register("noticePeriod")}
+                                id="noticePeriod"
+                                options={[
+                                    { value: "worked", label: "Trabalhado", selected: true },
+                                    { value: "compensated_by_employer", label: "Indenizado pelo empregador" },
+                                    { value: "not_fulfilled_by_employee", label: "Não cumprido pelo empregado" },
+                                    { value: "dismissed", label: "Dispensado" }
+                                    ]}
+                                onChange={(value) => setValue("noticePeriod", value)}
                                 />
                         </div>
 
@@ -120,7 +150,7 @@ export const FormCalculadora13 = () => {
 
                     <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
-                            {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
+                            {/* {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
                                 Valor líquido a receber até <b>30 de novembro</b> em <b>parcela única</b>: <br/>
                                 <strong className="text-4xl leading-relaxed">{formatToBRL(result.totalLiquido)}</strong>.
                             </p>}
@@ -149,10 +179,10 @@ export const FormCalculadora13 = () => {
                             {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8 py-6">
                                 Valor bruto: <br/> 
                                 <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
-                            </p>}
+                            </p>} */}
 
 
-                            {getValues('paymentType') === 'first' ? 
+                            {getValues('reasonType') === 'first' ? 
                                 <p className="text-lg text-gray-600 px-8">
                                     Total de impostos:<br/> 
                                     <strong className="text-2xl">{formatToBRL(0)}</strong>

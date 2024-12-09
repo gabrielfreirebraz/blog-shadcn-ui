@@ -1,12 +1,11 @@
-interface DecimoTerceiroInputs {
+interface RescisaoInputs {
   salaryGross: number; // Salário bruto do funcionário
   workMonths: number; // Quantidade de meses trabalhados no ano
   dependentsNumber: number; // Número de dependentes
-  reasonType?: string; // Tipo de pagamento: única, primeira parcela, ou segunda parcela
-  noticePeriod?: string;
+  paymentType?: string; // Tipo de pagamento: única, primeira parcela, ou segunda parcela
 }
 
-interface DecimoTerceiroResult {
+interface RescisaoResult {
   primeiraParcela: number;
   segundaParcela: number;
   totalBruto: number;

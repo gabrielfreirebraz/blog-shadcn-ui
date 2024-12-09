@@ -1,7 +1,18 @@
 import { FormCalculadora13 } from "@/components/feature/calculadora13/FormCalculadora13";
+import { FormCalculadoraRescisao } from "@/components/feature/calculadoraRescisao/FormCalculadoraRescisao";
 
 
 export const itemsMaterialList: MaterialPreview[] = [
+    {
+      link: 'material-de-apoio/calculadora/rescisao',
+      title: 'Calculadora de Rescisão: Simule e Planeje Seus Ganhos',
+      description: 'Disponibilizamos uma calculadora de rescisão para ajudá-lo a simular seus ganhos de forma rápida e prática. Preencha o formulário e saiba o valor exato que receberá, ideal para planejamento financeiro e controle dos gastos ao final do contrato de trabalho.',
+      dateRef: `2024-12-08`,
+      image: { src: '/images/calculadora-rescisao.webp', alt: 'Imagem de calculadora de rescisão' },
+      enable: true,
+      category: 'form',
+      formComponent: FormCalculadoraRescisao, 
+    },
     {
       link: 'material-de-apoio/calculadora/13-salario',
       title: 'Calculadora de Décimo Terceiro Salário: Simule e Planeje Seus Ganhos',
