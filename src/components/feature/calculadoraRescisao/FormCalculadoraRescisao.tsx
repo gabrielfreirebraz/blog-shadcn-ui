@@ -13,7 +13,7 @@ import { calculateRescisao } from "./useCases/calculateRescisao";
 
 
 export const FormCalculadoraRescisao = () => {
-    const [result, setResult] = useState<DecimoTerceiroResult>();
+    const [result, setResult] = useState<RescisaoResult>();
 
 
     const {
@@ -23,32 +23,32 @@ export const FormCalculadoraRescisao = () => {
         setValue,
         getValues,
         formState: { errors },
-      } = useForm<DecimoTerceiroInputs>({
+    } = useForm<RescisaoInputs>({
         defaultValues: {
             reasonType: 'no_just_cause',
-            noticePeriod: 'worked',
+            noticeType: 'worked',
             dependentsNumber: 0
         },
-      })
+    })
 
-      const onSubmit: SubmitHandler<DecimoTerceiroInputs> = (data) => {
+    const onSubmit: SubmitHandler<RescisaoInputs> = (data) => {
 
-        setResult(() => calculateRescisao(data) );
-      }
-    
-      return (
-        
+        setResult(() => calculateRescisao(data));
+    }
+
+    return (
+
         <div className="mx-auto mb-10 lg:mt-20 break-words prose-h1:text-4xl prose-h1:font-bold dark:prose-invert">
-        
+
             <div className="max-w-4xl mx-auto py-6">
-                <h1 className="mb-5">Calculadora de Rescisão<br/> (Valor líquido CLT)</h1>
+                <h1 className="mb-5">Calculadora de Rescisão<br /> (Valor líquido CLT)</h1>
                 <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de rescisão e comece seus novos planos.</p>
-            
+
                 <div className="flex flex-col md:flex-row">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md">
                         <div>
                             <label htmlFor="salaryGross" className="block text-sm font-medium text-gray-700">
-                            Salário bruto (*)
+                                Salário bruto (*)
                             </label>
                             <Input
                                 id="salaryGross"
@@ -56,18 +56,18 @@ export const FormCalculadoraRescisao = () => {
                                 {...register("salaryGross", { required: 'O salário bruto é obrigatório' })}
                                 onValueChange={(value) => setValue("salaryGross", Number(value))}
                                 error={errors.salaryGross?.message ?? null}
-                                currency 
+                                currency
                             />
                         </div>
 
                         <div>
                             <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
-                            Data de admissão / contratação (*)
+                                Data de admissão / contratação (*)
                             </label>
                             <InputDate
                                 id="startDate"
                                 {...register("startDate")}
-                                onChange={(value) => setValue("startDate", (value))}
+                                onChange={(e) => setValue("startDate", (e.target.value))}
                                 max="2024-12-08" // date now
                                 required
                                 placeholder="Selecione a data de início"
@@ -76,12 +76,12 @@ export const FormCalculadoraRescisao = () => {
 
                         <div>
                             <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
-                            Data de afastamento / demissão (*)
+                                Data de afastamento / demissão (*)
                             </label>
                             <InputDate
                                 id="endDate"
                                 {...register("endDate")}
-                                onChange={(value) => setValue("endDate", (value))}
+                                onChange={(e) => setValue("endDate", (e.target.value))}
                                 min="2024-12-08" // date now
                                 required
                                 placeholder="Selecione a data de término"
@@ -90,7 +90,7 @@ export const FormCalculadoraRescisao = () => {
 
                         <div>
                             <label htmlFor="dependentsNumber" className="block text-sm font-medium text-gray-700">
-                            Número de dependentes
+                                Número de dependentes
                             </label>
                             <Input
                                 id="dependentsNumber"
@@ -99,13 +99,13 @@ export const FormCalculadoraRescisao = () => {
                                 onValueChange={(value) => setValue("dependentsNumber", Number(value))}
                                 defaultValue={0}
                                 onlyNumbers
-                            />  
-                        
+                            />
+
                         </div>
 
                         <div>
                             <label htmlFor="reasonType" className="block text-sm font-medium text-gray-700">
-                            Motivo (*)
+                                Motivo (*)
                             </label>
                             <Select
                                 {...register("reasonType")}
@@ -117,26 +117,26 @@ export const FormCalculadoraRescisao = () => {
                                     { value: "resignation", label: "Pedido de demissão" },
                                     { value: "end_contract_on_time", label: "Encerramento de contrato de experiência no prazo" },
                                     { value: "end_contract_before_time", label: "Encerramento de contrato de experiência antes prazo" }
-                                    ]}
+                                ]}
                                 onChange={(value) => setValue("reasonType", value)}
-                                />
+                            />
                         </div>
 
                         <div>
-                            <label htmlFor="noticePeriod" className="block text-sm font-medium text-gray-700">
-                            Aviso Prévio (*)
+                            <label htmlFor="noticeType" className="block text-sm font-medium text-gray-700">
+                                Aviso Prévio (*)
                             </label>
                             <Select
-                                {...register("noticePeriod")}
-                                id="noticePeriod"
+                                {...register("noticeType")}
+                                id="noticeType"
                                 options={[
                                     { value: "worked", label: "Trabalhado", selected: true },
                                     { value: "compensated_by_employer", label: "Indenizado pelo empregador" },
                                     { value: "not_fulfilled_by_employee", label: "Não cumprido pelo empregado" },
                                     { value: "dismissed", label: "Dispensado" }
-                                    ]}
-                                onChange={(value) => setValue("noticePeriod", value)}
-                                />
+                                ]}
+                                onChange={(value) => setValue("noticeType", value)}
+                            />
                         </div>
 
                         <Button type="submit" className="w-full">
@@ -178,33 +178,33 @@ export const FormCalculadoraRescisao = () => {
                             </p>} */}
 
 
-                            {getValues('reasonType') === 'first' ? 
+                            {getValues('reasonType') === 'first' ?
                                 <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos:<br/> 
+                                    Total de impostos:<br />
                                     <strong className="text-2xl">{formatToBRL(0)}</strong>
-                                    <br/><br/>
+                                    <br /><br />
                                     • <strong>INSS:</strong> {`-`}
-                                    <br/>
+                                    <br />
                                     • <strong>IRRF:</strong> {`-`}
                                 </p>
-                                : 
+                                :
                                 <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos:<br/> 
-                                    <strong className="text-2xl">{formatToBRL(result.descontosTotais)}</strong>
-                                    <br/><br/>
+                                    Total de impostos:<br />
+                                    <strong className="text-2xl">{formatToBRL(result.deductionsTotal)}</strong>
+                                    <br /><br />
                                     • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
-                                    <br/>
+                                    <br />
                                     • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
                                 </p>}
-                            </>}
+                        </>}
                     </div>
                 </div>
 
                 <div className="prose md:prose-md dark:prose-invert m-auto mt-20 mb-10">
-                    <Markdown>{text}</Markdown>      
+                    <Markdown>{text}</Markdown>
                 </div>
             </div>
         </div>
-        
-      )
+
+    )
 }

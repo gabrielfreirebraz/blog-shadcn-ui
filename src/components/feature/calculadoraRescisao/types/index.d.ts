@@ -1,19 +1,23 @@
 interface RescisaoInputs {
   salaryGross: number; // Salário bruto do funcionário
-  startDate: number; //
-  endDate: number; //
+  startDate: string; //
+  endDate: string; //
   dependentsNumber: number; // Número de dependentes
-  paymentType?: string; // Tipo de pagamento: única, primeira parcela, ou segunda parcela
+  reasonType?: string; // Motivo da dispensa
+  noticeType?: string; // Tipo de dispensa
 }
 
 interface RescisaoResult {
-  primeiraParcela: number;
-  segundaParcela: number;
-  totalBruto: number;
-  totalLiquido: number;
-  descontosTotais: number;
+  salaryBalance: number; // Saldo de Salário
+  proportionalThirteenthSalary: number; // 13º Salário Proporcional
+  proportionalVacation: number; // Férias Proporcionais + 1/3
+  priorNotice: number; // Aviso Prévio
+  fgtsFine: number; // Multa de 40% FGTS
+  grossTotal: number; // Total Bruto
+  deductionsTotal: number; // Descontos
   inss: number;
   inssPercent: number;
   ir: number;
   irPercent: number;
-}
+  netTotal: number; // Total Líquido
+};

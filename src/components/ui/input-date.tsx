@@ -2,10 +2,10 @@ import React from "react";
 
 type InputDateProps = {
   id: string; // Identificador único do input
-  value: string; // Valor do campo no formato ISO (YYYY-MM-DD)
+  value?: string; // Valor do campo no formato ISO (YYYY-MM-DD)
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Função para lidar com mudanças no valor
-  min?: string; // Data mínima no formato ISO (opcional)
-  max?: string; // Data máxima no formato ISO (opcional)
+  min?: string | number; // Data mínima no formato ISO (opcional)
+  max?: string | number; // Data máxima no formato ISO (opcional)
   required?: boolean; // Define se o campo é obrigatório
   placeholder?: string; // Texto de ajuda exibido no campo (opcional)
 };
