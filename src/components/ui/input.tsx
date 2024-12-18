@@ -11,7 +11,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<InputProps> = ({ className, error, onlyNumbers, currency, onInput, onValueChange, ...props }) => {
 
   const formatToBRL = (value: string): string => {
-    const numericValue = value.replace(/\D/g, ""); 
+    const numericValue = value.replace(/\D/g, "");
     const formattedValue = (Number(numericValue) / 100).toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
@@ -29,14 +29,14 @@ const Input: React.FC<InputProps> = ({ className, error, onlyNumbers, currency, 
     } else if (currency) {
       input.value = formatToBRL(input.value); // Formatar como BRL
     }
-    
+
     if (onValueChange) {
       const value = currency ? unformatBRL(input.value) : input.value;
-      onValueChange(value); 
+      onValueChange(value);
 
     }
     if (onInput) {
-      onInput(event); 
+      onInput(event);
     }
   };
 

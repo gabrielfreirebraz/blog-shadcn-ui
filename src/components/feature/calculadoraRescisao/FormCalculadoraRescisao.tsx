@@ -10,6 +10,8 @@ import { text } from "./utils/description";
 import { useState } from "react";
 import { formatToBRL } from "@/utils/formatToBRL";
 import { calculateRescisao } from "./useCases/calculateRescisao";
+import { NoticeType, TerminationType } from "@/components/enums/TerminationType";
+import { RescisaoInputs, RescisaoResult } from "./types";
 
 
 export const FormCalculadoraRescisao = () => {
@@ -25,14 +27,15 @@ export const FormCalculadoraRescisao = () => {
         formState: { errors },
     } = useForm<RescisaoInputs>({
         defaultValues: {
-            reasonType: 'no_just_cause',
-            noticeType: 'worked',
+            reasonType: TerminationType.NO_JUST_CAUSE,
+            noticeType: NoticeType.WORKED,
             dependentsNumber: 0
         },
     })
 
     const onSubmit: SubmitHandler<RescisaoInputs> = (data) => {
 
+        console.log('aqui', data)
         setResult(() => calculateRescisao(data));
     }
 
@@ -111,14 +114,14 @@ export const FormCalculadoraRescisao = () => {
                                 {...register("reasonType")}
                                 id="reasonType"
                                 options={[
-                                    { value: "common_agreement", label: "Demissão de comum acordo" },
-                                    { value: "no_just_cause", label: "Dispensa sem justa causa", selected: true },
-                                    { value: "with_just_cause", label: "Dispensa com justa causa" },
-                                    { value: "resignation", label: "Pedido de demissão" },
-                                    { value: "end_contract_on_time", label: "Encerramento de contrato de experiência no prazo" },
-                                    { value: "end_contract_before_time", label: "Encerramento de contrato de experiência antes prazo" }
+                                    { value: TerminationType.COMMON_AGREEMENT, label: "Demissão de comum acordo" },
+                                    { value: TerminationType.NO_JUST_CAUSE, label: "Dispensa sem justa causa", selected: true },
+                                    { value: TerminationType.WITH_JUST_CAUSE, label: "Dispensa com justa causa" },
+                                    { value: TerminationType.RESIGNATION, label: "Pedido de demissão" },
+                                    { value: TerminationType.END_CONTRACT_ON_TIME, label: "Encerramento de contrato de experiência no prazo" },
+                                    { value: TerminationType.END_CONTRACT_BEFORE_TIME, label: "Encerramento de contrato de experiência antes prazo" }
                                 ]}
-                                onChange={(value) => setValue("reasonType", value)}
+                                onChange={(value) => setValue("reasonType", value as TerminationType)}
                             />
                         </div>
 
@@ -130,10 +133,10 @@ export const FormCalculadoraRescisao = () => {
                                 {...register("noticeType")}
                                 id="noticeType"
                                 options={[
-                                    { value: "worked", label: "Trabalhado", selected: true },
-                                    { value: "compensated_by_employer", label: "Indenizado pelo empregador" },
-                                    { value: "not_fulfilled_by_employee", label: "Não cumprido pelo empregado" },
-                                    { value: "dismissed", label: "Dispensado" }
+                                    { value: NoticeType.WORKED, label: "Trabalhado", selected: true },
+                                    { value: NoticeType.COMPENSATED_BY_EMPLOYER, label: "Indenizado pelo empregador" },
+                                    { value: NoticeType.NOT_FULFILLED_BY_EMPLOYEE, label: "Não cumprido pelo empregado" },
+                                    { value: NoticeType.DISMISSED, label: "Dispensado" }
                                 ]}
                                 onChange={(value) => setValue("noticeType", value)}
                             />
@@ -178,7 +181,7 @@ export const FormCalculadoraRescisao = () => {
                             </p>} */}
 
 
-                            {getValues('reasonType') === 'first' ?
+                            {/* {getValues('reasonType') === 'first' ?
                                 <p className="text-lg text-gray-600 px-8">
                                     Total de impostos:<br />
                                     <strong className="text-2xl">{formatToBRL(0)}</strong>
@@ -195,7 +198,7 @@ export const FormCalculadoraRescisao = () => {
                                     • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
                                     <br />
                                     • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
-                                </p>}
+                                </p>} */}
                         </>}
                     </div>
                 </div>

@@ -22,31 +22,31 @@ export const FormCalculadora13 = () => {
         setValue,
         getValues,
         formState: { errors },
-      } = useForm<DecimoTerceiroInputs>({
+    } = useForm<DecimoTerceiroInputs>({
         defaultValues: {
             paymentType: 'unique',
             dependentsNumber: 0
         },
-      })
+    })
 
-      const onSubmit: SubmitHandler<DecimoTerceiroInputs> = (data) => {
+    const onSubmit: SubmitHandler<DecimoTerceiroInputs> = (data) => {
 
-        setResult(() => calculateDecimoTerceiro(data) );
-      }
-    
-      return (
-        
+        setResult(() => calculateDecimoTerceiro(data));
+    }
+
+    return (
+
         <div className="mx-auto mb-10 lg:mt-20 break-words prose-h1:text-4xl prose-h1:font-bold dark:prose-invert">
-        
+
             <div className="max-w-4xl mx-auto py-6">
-                <h1 className="mb-5">Calculadora de Décimo terceiro salário<br/> (Valor líquido CLT)</h1>
+                <h1 className="mb-5">Calculadora de Décimo terceiro salário<br /> (Valor líquido CLT)</h1>
                 <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de décimo terceiro esse ano e comece seus planos.</p>
-            
+
                 <div className="flex flex-col md:flex-row">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md">
                         <div>
                             <label htmlFor="salaryGross" className="block text-sm font-medium text-gray-700">
-                            Salário bruto (*)
+                                Salário bruto (*)
                             </label>
                             <Input
                                 id="salaryGross"
@@ -54,37 +54,37 @@ export const FormCalculadora13 = () => {
                                 {...register("salaryGross", { required: 'O salário bruto é obrigatório' })}
                                 onValueChange={(value) => setValue("salaryGross", Number(value))}
                                 error={errors.salaryGross?.message ?? null}
-                                currency 
+                                currency
                             />
                         </div>
 
                         <div>
                             <label htmlFor="workMonths" className="block text-sm font-medium text-gray-700">
-                            Meses trabalhados (*)
+                                Meses trabalhados (*)
                             </label>
                             <Input
                                 id="workMonths"
                                 placeholder="Entre com o total de meses trabalhados até o momento"
-                                {...register("workMonths", { 
+                                {...register("workMonths", {
                                     required: "O total de meses trabalhados é obrigatório",
                                     min: {
-                                      value: 1,
-                                      message: "O valor deve ser entre 1 e 12",
+                                        value: 1,
+                                        message: "O valor deve ser entre 1 e 12",
                                     },
                                     max: {
-                                      value: 12,
-                                      message: "O valor deve ser entre 1 e 12",
+                                        value: 12,
+                                        message: "O valor deve ser entre 1 e 12",
                                     },
-                                 })}
+                                })}
                                 onValueChange={(value) => setValue("workMonths", Number(value))}
                                 error={errors.workMonths?.message ?? null}
                                 onlyNumbers
-                            />                
+                            />
                         </div>
 
                         <div>
                             <label htmlFor="dependentsNumber" className="block text-sm font-medium text-gray-700">
-                            Número de dependentes
+                                Número de dependentes
                             </label>
                             <Input
                                 id="dependentsNumber"
@@ -93,13 +93,13 @@ export const FormCalculadora13 = () => {
                                 onValueChange={(value) => setValue("dependentsNumber", Number(value))}
                                 defaultValue={0}
                                 onlyNumbers
-                            />  
-                        
+                            />
+
                         </div>
 
                         <div>
                             <label htmlFor="paymentType" className="block text-sm font-medium text-gray-700">
-                            Tipo de pagamento
+                                Tipo de pagamento
                             </label>
                             <Select
                                 {...register("paymentType")}
@@ -108,9 +108,9 @@ export const FormCalculadora13 = () => {
                                     { value: "unique", label: "Única", selected: true },
                                     { value: "first", label: "Primeira" },
                                     { value: "second", label: "Segunda" },
-                                    ]}
+                                ]}
                                 onChange={(value) => setValue("paymentType", value)}
-                                />
+                            />
                         </div>
 
                         <Button type="submit" className="w-full">
@@ -121,64 +121,64 @@ export const FormCalculadora13 = () => {
                     <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
                             {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>30 de novembro</b> em <b>parcela única</b>: <br/>
+                                Valor líquido a receber até <b>30 de novembro</b> em <b>parcela única</b>: <br />
                                 <strong className="text-4xl leading-relaxed">{formatToBRL(result.totalLiquido)}</strong>.
                             </p>}
 
                             {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>30 de novembro</b> da <b>primeira parcela</b>: <br/>
+                                Valor líquido a receber até <b>30 de novembro</b> da <b>primeira parcela</b>: <br />
                                 <strong className="text-4xl leading-relaxed">{formatToBRL(result.primeiraParcela)}</strong>.
                             </p>}
 
                             {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>20 de dezembro</b> da <b>segunda parcela</b>: <br/>
+                                Valor líquido a receber até <b>20 de dezembro</b> da <b>segunda parcela</b>: <br />
                                 <strong className="text-4xl leading-relaxed">{formatToBRL(result.segundaParcela)}</strong>.
                             </p>}
-                            
+
 
                             {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8 py-6">
-                                Valor bruto: <br/> 
+                                Valor bruto: <br />
                                 <strong className="text-2xl">{formatToBRL(result.totalBruto)}</strong>
                             </p>}
 
                             {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8 py-6">
-                                Valor bruto: <br/> 
+                                Valor bruto: <br />
                                 <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
                             </p>}
 
                             {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8 py-6">
-                                Valor bruto: <br/> 
+                                Valor bruto: <br />
                                 <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
                             </p>}
 
 
-                            {getValues('paymentType') === 'first' ? 
+                            {getValues('paymentType') === 'first' ?
                                 <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos:<br/> 
+                                    Total de impostos:<br />
                                     <strong className="text-2xl">{formatToBRL(0)}</strong>
-                                    <br/><br/>
+                                    <br /><br />
                                     • <strong>INSS:</strong> {`-`}
-                                    <br/>
+                                    <br />
                                     • <strong>IRRF:</strong> {`-`}
                                 </p>
-                                : 
+                                :
                                 <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos:<br/> 
+                                    Total de impostos:<br />
                                     <strong className="text-2xl">{formatToBRL(result.descontosTotais)}</strong>
-                                    <br/><br/>
+                                    <br /><br />
                                     • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
-                                    <br/>
+                                    <br />
                                     • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
                                 </p>}
-                            </>}
+                        </>}
                     </div>
                 </div>
 
                 <div className="prose md:prose-md dark:prose-invert m-auto mt-20 mb-10">
-                    <Markdown>{text}</Markdown>      
+                    <Markdown>{text}</Markdown>
                 </div>
             </div>
         </div>
-        
-      )
+
+    )
 }
