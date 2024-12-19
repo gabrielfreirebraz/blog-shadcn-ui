@@ -12,6 +12,7 @@ import { formatToBRL } from "@/utils/formatToBRL";
 import { calculateRescisao } from "./useCases/calculateRescisao";
 import { NoticeType, TerminationType } from "@/components/enums/TerminationType";
 import { RescisaoInputs, RescisaoResult } from "./types";
+import { showCurrentDate } from "./utils/currDate";
 
 
 export const FormCalculadoraRescisao = () => {
@@ -71,7 +72,7 @@ export const FormCalculadoraRescisao = () => {
                                 id="startDate"
                                 {...register("startDate")}
                                 onChange={(e) => setValue("startDate", (e.target.value))}
-                                max="2024-12-08" // date now
+                                max={`${showCurrentDate()}`}
                                 required
                                 placeholder="Selecione a data de início"
                             />
@@ -85,7 +86,7 @@ export const FormCalculadoraRescisao = () => {
                                 id="endDate"
                                 {...register("endDate")}
                                 onChange={(e) => setValue("endDate", (e.target.value))}
-                                min="2024-12-08" // date now
+                                min={`${showCurrentDate()}`}
                                 required
                                 placeholder="Selecione a data de término"
                             />
@@ -150,7 +151,7 @@ export const FormCalculadoraRescisao = () => {
                     <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
                             {getValues('reasonType') === TerminationType.NO_JUST_CAUSE && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber em até <b>10 dias corridos</b>: <br />
+                                Valor líquido a receber em até <b>10 dias corridos</b> após notificar rescisão: <br />
                                 <strong className="text-4xl leading-relaxed">{formatToBRL(result.netTotal)}</strong>.
                             </p>}
 
