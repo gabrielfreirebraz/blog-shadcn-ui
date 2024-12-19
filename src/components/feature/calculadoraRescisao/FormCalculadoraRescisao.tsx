@@ -149,56 +149,46 @@ export const FormCalculadoraRescisao = () => {
 
                     <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
-                            {/* {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>30 de novembro</b> em <b>parcela única</b>: <br/>
-                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.totalLiquido)}</strong>.
+                            {getValues('reasonType') === TerminationType.NO_JUST_CAUSE && <p className="text-lg text-gray-600 px-8">
+                                Valor líquido a receber em até <b>10 dias corridos</b>: <br />
+                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.netTotal)}</strong>.
                             </p>}
 
-                            {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>30 de novembro</b> da <b>primeira parcela</b>: <br/>
-                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.primeiraParcela)}</strong>.
+                            {getValues('reasonType') === TerminationType.NO_JUST_CAUSE && <p className="text-lg text-gray-600 px-8 py-6">
+                                Valor bruto a receber: <br />
+                                <strong className="text-2xl">{formatToBRL(result.grossTotal)}</strong>
                             </p>}
 
-                            {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber até <b>20 de dezembro</b> da <b>segunda parcela</b>: <br/>
-                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.segundaParcela)}</strong>.
-                            </p>}
-                            
 
-                            {getValues('paymentType') === 'unique' && <p className="text-lg text-gray-600 px-8 py-6">
-                                Valor bruto: <br/> 
-                                <strong className="text-2xl">{formatToBRL(result.totalBruto)}</strong>
-                            </p>}
-
-                            {getValues('paymentType') === 'first' && <p className="text-lg text-gray-600 px-8 py-6">
-                                Valor bruto: <br/> 
-                                <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
-                            </p>}
-
-                            {getValues('paymentType') === 'second' && <p className="text-lg text-gray-600 px-8 py-6">
-                                Valor bruto: <br/> 
-                                <strong className="text-2xl">{formatToBRL(result.primeiraParcela)}</strong>
-                            </p>} */}
-
-
-                            {/* {getValues('reasonType') === 'first' ?
+                            {getValues('reasonType') === TerminationType.NO_JUST_CAUSE ?
                                 <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos:<br />
+                                    Total de impostos e descontos:<br />
                                     <strong className="text-2xl">{formatToBRL(0)}</strong>
                                     <br /><br />
-                                    • <strong>INSS:</strong> {`-`}
+                                    {/* • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
                                     <br />
-                                    • <strong>IRRF:</strong> {`-`}
+                                    • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
+                                    <br /><br /> */}
+                                    • <strong>Saldo de Salário:</strong> {`-`}
+                                    <br />
+                                    • <strong>13º Salário Proporcional:</strong> {`-`}
+                                    <br />
+                                    • <strong>Férias (Proporcionais + 13º):</strong> {`-`}
+                                    <br />
+                                    • <strong>Aviso Prévio:</strong> {`-`}
+                                    <br />
+                                    • <strong>Multa de 40% FGTS:</strong> {`-`}
+
                                 </p>
                                 :
                                 <p className="text-lg text-gray-600 px-8">
                                     Total de impostos:<br />
                                     <strong className="text-2xl">{formatToBRL(result.deductionsTotal)}</strong>
                                     <br /><br />
-                                    • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
+                                    {/* • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
                                     <br />
-                                    • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
-                                </p>} */}
+                                    • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref. */}
+                                </p>}
                         </>}
                     </div>
                 </div>
