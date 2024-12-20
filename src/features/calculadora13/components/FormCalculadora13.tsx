@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { calculateDecimoTerceiro } from "./useCases/calculateDecimoTerceiro";
+import { calculateDecimoTerceiro } from "../useCases/calculateDecimoTerceiro";
 import Markdown from "react-markdown";
-import { text } from "./utils/description";
+import { text } from "../utils/description";
 import { useState } from "react";
 import { formatToBRL } from "@/utils/formatToBRL";
 

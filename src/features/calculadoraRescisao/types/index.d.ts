@@ -1,4 +1,4 @@
-import { TerminationType } from "@/components/enums/TerminationType";
+import { TerminationType } from "@/features/calculadoraRescisao/enum/TerminationType";
 
 export interface RescisaoInputs {
   salaryGross: number; // Salário bruto do funcionário

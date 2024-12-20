@@ -6,13 +6,14 @@ import { InputDate } from "@/components/ui/input-date";
 import { Select } from "@/components/ui/select";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Markdown from "react-markdown";
-import { text } from "./utils/description";
+import { text } from "../utils/description";
 import { useState } from "react";
 import { formatToBRL } from "@/utils/formatToBRL";
-import { calculateRescisao } from "./useCases/calculateRescisao";
-import { NoticeType, TerminationType } from "@/components/enums/TerminationType";
-import { RescisaoInputs, RescisaoResult } from "./types";
-import { showCurrentDate } from "./utils/currDate";
+import { calculateRescisao } from "../useCases/calculateRescisao";
+import { NoticeType, TerminationType } from "@/features/calculadoraRescisao/enum/TerminationType";
+import { RescisaoInputs, RescisaoResult } from "../types";
+import { showCurrentDate } from "../utils/currDate";
+import { TerminationNetMessage } from "./TerminationNetMessage";
 
 
 export const FormCalculadoraRescisao = () => {
@@ -150,12 +151,13 @@ export const FormCalculadoraRescisao = () => {
 
                     <div className="md:my-auto mt-16 mb-10 w-full max-w-md">
                         {result && <>
-                            {getValues('reasonType') === TerminationType.NO_JUST_CAUSE && <p className="text-lg text-gray-600 px-8">
-                                Valor líquido a receber em até <b>10 dias corridos</b> após notificar rescisão: <br />
-                                <strong className="text-4xl leading-relaxed">{formatToBRL(result.netTotal)}</strong>.
-                            </p>}
 
-                            {getValues('reasonType') === TerminationType.NO_JUST_CAUSE && <p className="text-lg text-gray-600 px-8 py-6">
+                            <TerminationNetMessage
+                                terminationType={getValues('reasonType') as TerminationType}
+                                noticeType={getValues('noticeType') as NoticeType}
+                                netTotal={result.netTotal} />
+
+                            {<p className="text-lg text-gray-600 px-8 py-6">
                                 Valor bruto a receber: <br />
                                 <strong className="text-2xl">{formatToBRL(result.grossTotal)}</strong>
                             </p>}
