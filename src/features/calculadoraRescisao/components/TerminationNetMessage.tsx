@@ -14,7 +14,7 @@ export const TerminationNetMessage: React.FC<TerminationMessageProps> = ({ termi
       <InitialMessage
         terminationType={terminationType}
         noticeType={noticeType} />
-      <strong className="text-4xl leading-relaxed">{formatToBRL(netTotal)}</strong>.
+      <strong className="text-4xl leading-relaxed">{formatToBRL(netTotal)}</strong>
     </p>
   </>
 };

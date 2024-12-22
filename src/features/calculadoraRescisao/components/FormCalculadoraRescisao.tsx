@@ -87,7 +87,7 @@ export const FormCalculadoraRescisao = () => {
                                 id="endDate"
                                 {...register("endDate")}
                                 onChange={(e) => setValue("endDate", (e.target.value))}
-                                min={`${showCurrentDate()}`}
+                                // min={`${showCurrentDate()}`}
                                 required
                                 placeholder="Selecione a data de término"
                             />
@@ -162,36 +162,25 @@ export const FormCalculadoraRescisao = () => {
                                 <strong className="text-2xl">{formatToBRL(result.grossTotal)}</strong>
                             </p>}
 
+                            <p className="text-lg text-gray-600 px-8">
+                                Total de impostos e descontos:<br />
+                                <strong className="text-2xl">{formatToBRL(result.deductionsTotal)}</strong>
+                                <br /><br />
+                                • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
+                                <br />
+                                • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
+                                <br /><br />
+                                • <strong>Saldo de Salário:</strong> {`${result.salaryBalance}`}
+                                <br />
+                                • <strong>13º Salário Proporcional:</strong> ${result.proportionalThirteenthSalary}
+                                <br />
+                                • <strong>Férias (Proporcionais + 13º):</strong> {`${result.proportionalVacation}`}
+                                <br />
+                                • <strong>Aviso Prévio:</strong> {`${result.priorNotice}`}
+                                <br />
+                                • <strong>Multa de 40% FGTS:</strong> {`${result.fgtsFine}`}
 
-                            {getValues('reasonType') === TerminationType.NO_JUST_CAUSE ?
-                                <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos e descontos:<br />
-                                    <strong className="text-2xl">{formatToBRL(0)}</strong>
-                                    <br /><br />
-                                    {/* • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
-                                    <br />
-                                    • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
-                                    <br /><br /> */}
-                                    • <strong>Saldo de Salário:</strong> {`-`}
-                                    <br />
-                                    • <strong>13º Salário Proporcional:</strong> {`-`}
-                                    <br />
-                                    • <strong>Férias (Proporcionais + 13º):</strong> {`-`}
-                                    <br />
-                                    • <strong>Aviso Prévio:</strong> {`-`}
-                                    <br />
-                                    • <strong>Multa de 40% FGTS:</strong> {`-`}
-
-                                </p>
-                                :
-                                <p className="text-lg text-gray-600 px-8">
-                                    Total de impostos:<br />
-                                    <strong className="text-2xl">{formatToBRL(result.deductionsTotal)}</strong>
-                                    <br /><br />
-                                    {/* • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
-                                    <br />
-                                    • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref. */}
-                                </p>}
+                            </p>
                         </>}
                     </div>
                 </div>
