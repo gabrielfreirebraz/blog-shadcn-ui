@@ -34,7 +34,7 @@ export const itemsMaterialList: MaterialPreview[] = [
     downloadUrl: 'https://docs.google.com/spreadsheets/d/1L54b0VkEAUKiMvHtK1EcZ5rsn7eEBY_R/edit?usp=sharing&ouid=115491023356602678566&rtpof=true&sd=true'
   },
   {
-    link: 'material-de-apoio/planilha/gastos-mensais',
+    link: 'material-de-apoio/planilha/gastos-mensais-familiar',
     title: 'Planilha de Orçamento Familiar Gratuita: Diga Adeus ao Caos Financeiro',
     description: 'Assuma o controle do seu orçamento familiar com uma planilha prática e completa. Monitore receitas, despesas e alcance suas metas financeiras com facilidade. É grátis, baixe agora!',
     dateRef: `2024-12-20`,
