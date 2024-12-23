@@ -23,15 +23,15 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { SiMicrosoftexcel } from "react-icons/si";
+import { PiMicrosoftExcelLogoFill } from "react-icons/pi";
 import { RiCalculatorLine } from "react-icons/ri";
 import { menuCategoryList } from "@/app/api/categoria/menu-list";
 import { useTheme } from "next-themes";
 
 
 const menuItems: MenuItem[] = [
-  ...menuCategoryList,  
-  { name: "Materiais", href: "/material-de-apoio", dropdown: false }, 
+  ...menuCategoryList,
+  { name: "Materiais", href: "/material-de-apoio", dropdown: false },
   { name: "Sobre", href: "/sobre" },
 ];
 export const Navigation: FunctionComponent = () => {
@@ -44,8 +44,8 @@ export const Navigation: FunctionComponent = () => {
           <div key={item.href} className="ml-4 md:ml-8">
 
             {item.dropdown ?
-              <MemoizedDropdownMaterialMenu contentClassName={`w-80 p-4`} /> 
-              : 
+              <MemoizedDropdownMaterialMenu contentClassName={`w-80 p-4`} />
+              :
 
               <Link
                 href={item.href}
@@ -59,7 +59,7 @@ export const Navigation: FunctionComponent = () => {
               </Link>}
           </div>
         ))}
-        
+
       </div>
       <div className="md:hidden">
         <Sheet>
@@ -71,9 +71,9 @@ export const Navigation: FunctionComponent = () => {
               <SheetDescription>
                 {menuItems.map((item: MenuItem) => (
                   <div key={item.href}>
-                    {item.dropdown ? 
-                      <DropdownMaterialMenu contentClassName={`w-72 p-6`} /> 
-                      : 
+                    {item.dropdown ?
+                      <DropdownMaterialMenu contentClassName={`w-72 p-6`} />
+                      :
 
                       <Link
                         key={item.href}
@@ -86,7 +86,7 @@ export const Navigation: FunctionComponent = () => {
                       >
                         {item.name}
                       </Link>}
-                    </div>
+                  </div>
                 ))}
               </SheetDescription>
             </SheetHeader>
@@ -104,7 +104,7 @@ export const Header: FunctionComponent = () => {
     <section className="flex items-center justify-between mt-8 md:mt-16 mb-12">
       <Link href="/" className="md:-mt-8">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-          <Image alt={`Logo Bolso Extra`} src={resolvedTheme === "dark" ? `/images/bolsoextra-darkmode.png`: `/images/bolsoextra.png`} height={100} width={150} />
+          <Image alt={`Logo Bolso Extra`} src={resolvedTheme === "dark" ? `/images/bolsoextra-darkmode.png` : `/images/bolsoextra.png`} height={100} width={150} />
         </h1>
       </Link>
       <Navigation />
@@ -112,7 +112,7 @@ export const Header: FunctionComponent = () => {
   );
 };
 
-function DropdownMaterialMenu({contentClassName = `w-56`}: Readonly<{ contentClassName?: string }>) {
+function DropdownMaterialMenu({ contentClassName = `w-56` }: Readonly<{ contentClassName?: string }>) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -125,53 +125,53 @@ function DropdownMaterialMenu({contentClassName = `w-56`}: Readonly<{ contentCla
   // const isMobile = useMediaQuery({ maxWidth: 768 }); 
 
   return (
-      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-        
-        <DropdownMenuTrigger asChild>
-          <Link
-            href={`#`}
-            target={"_self"}
-            className={cn(
-              "block py-2 outline-none",
-              // pathname === "material" && "font-bold"
-            )}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            Materiais
-          </Link>          
-        </DropdownMenuTrigger> 
-  
-        <DropdownMenuContent 
-          className={cn(contentClassName)}
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+
+      <DropdownMenuTrigger asChild>
+        <Link
+          href={`#`}
+          target={"_self"}
+          className={cn(
+            "block py-2 outline-none",
+            // pathname === "material" && "font-bold"
+          )}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <DropdownMenuLabel>Material de Apoio</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Calculadora de 13 Salário
-              <DropdownMenuShortcut>
+          Materiais
+        </Link>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent
+        className={cn(contentClassName)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <DropdownMenuLabel>Material de Apoio</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            Calculadora de 13 Salário
+            <DropdownMenuShortcut>
               <RiCalculatorLine size={20} />
-              </DropdownMenuShortcut>
-            </DropdownMenuItem>
-            
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
 
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Planilha de Gasto Mensal
-              <DropdownMenuShortcut>
-                <SiMicrosoftexcel size={20} />
-              </DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
 
-        </DropdownMenuContent>
-      </DropdownMenu>
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            Planilha de Gasto Mensal
+            <DropdownMenuShortcut>
+              <PiMicrosoftExcelLogoFill size={20} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
