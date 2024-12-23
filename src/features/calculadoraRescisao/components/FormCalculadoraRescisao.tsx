@@ -47,7 +47,7 @@ export const FormCalculadoraRescisao = () => {
 
             <div className="max-w-4xl mx-auto py-6">
                 <h1 className="mb-5">Calculadora de Rescisão<br /> (Valor líquido CLT)</h1>
-                <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de rescisão e comece seus novos planos.</p>
+                <p className="text-lg text-gray-600 mb-16">Descubra quanto receberá de rescisão e recomece seus planos.</p>
 
                 <div className="flex flex-col md:flex-row">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full max-w-md">
@@ -174,7 +174,7 @@ export const FormCalculadoraRescisao = () => {
                                 <br />
                                 • <strong>13º Salário Proporcional:</strong> {formatToBRL(result.proportionalThirteenthSalary)}
                                 <br />
-                                • <strong>Férias (Proporcionais + 13º):</strong> {formatToBRL(result.proportionalVacation)}
+                                • <strong>Férias Proporcionais:</strong> {formatToBRL(result.proportionalVacation)}
                                 <br />
                                 • <strong>Aviso Prévio:</strong> {formatToBRL(result.priorNotice)}
                                 <br />

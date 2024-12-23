@@ -34,9 +34,10 @@ export const calculateRescisao = ({
   const proportionalThirteenthSalary =
     (salaryGross / 12) * (totalMonthsWorked + workedDays / totalDaysInMonth);
 
-  const proportionalVacation =
-    (salaryGross / 12) * (totalMonthsWorked + workedDays / totalDaysInMonth) +
+    const proportionalVacation =
+    (salaryGross / 12) * totalMonthsWorked + (workedDays / totalDaysInMonth) * (salaryGross / 12) +
     (salaryGross / 12) * (1 / 3);
+
   const vacationVencida = yearsWorked >= 1 ? salaryGross + salaryGross / 3 : 0;
 
   // Aviso Prévio
@@ -196,18 +197,3 @@ export const calculateRescisao = ({
     netTotal: parseFloat(netTotal.toFixed(2)),
   };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
