@@ -166,19 +166,23 @@ export const FormCalculadoraRescisao = () => {
                                 Total de impostos e descontos:<br />
                                 <strong className="text-2xl">{formatToBRL(result.deductionsTotal)}</strong>
                                 <br /><br />
-                                • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssPercent}% Ref.
+                                • <strong>INSS:</strong> {formatToBRL(result.inss)} - {result.inssReferencePercent}% Ref.
                                 <br />
-                                • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irPercent}% Ref.
-                                <br /><br />
-                                • <strong>Saldo de Salário:</strong> {`${result.salaryBalance}`}
+                                • <strong>IRRF:</strong> {formatToBRL(result.ir)} - {result.irReferencePercent}% Ref.
                                 <br />
-                                • <strong>13º Salário Proporcional:</strong> ${result.proportionalThirteenthSalary}
+                                • <strong>Saldo de Salário:</strong> {formatToBRL(result.salaryBalance)}
                                 <br />
-                                • <strong>Férias (Proporcionais + 13º):</strong> {`${result.proportionalVacation}`}
+                                • <strong>13º Salário Proporcional:</strong> {formatToBRL(result.proportionalThirteenthSalary)}
                                 <br />
-                                • <strong>Aviso Prévio:</strong> {`${result.priorNotice}`}
+                                • <strong>Férias (Proporcionais + 13º):</strong> {formatToBRL(result.proportionalVacation)}
                                 <br />
-                                • <strong>Multa de 40% FGTS:</strong> {`${result.fgtsFine}`}
+                                • <strong>Aviso Prévio:</strong> {formatToBRL(result.priorNotice)}
+                                <br />
+                                • <strong>Multa de 40% FGTS:</strong> {formatToBRL(result.fgtsFine)}
+                                <br />
+                                • <strong>Saldo FGTS:</strong> {formatToBRL(result.fgtsBalance)} - <strong>Saque</strong>: {result.fgtsAvailableForWithdrawal ? "Sim" : "Não"}
+                                <br />
+                                • <strong>Impostos sobre 13º (INSS + IR):</strong> {formatToBRL(result.deductionsTotal13)}
 
                             </p>
                         </>}

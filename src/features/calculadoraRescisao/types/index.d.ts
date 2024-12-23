@@ -22,4 +22,12 @@ export interface RescisaoResult {
   ir: number;
   irPercent: number;
   netTotal: number; // Total Líquido
+  inssReferencePercent?: number; // Percentual da última faixa aplicada do INSS (opcional)
+  irReferencePercent?: number; // Percentual da última faixa aplicada do IRRF (opcional)
+  fgtsAvailableForWithdrawal: boolean; 
+  fgtsBalance: number; 
+  ir13: number;
+  ir13Percent: number;
+  inss13Percent: number;
+  deductionsTotal13: number;
 };
