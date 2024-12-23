@@ -25,12 +25,22 @@ export const itemsMaterialList: MaterialPreview[] = [
   },
   {
     link: 'material-de-apoio/planilha/gastos-mensais',
-    title: 'Planilha de Controle de Gastos Mensais: Simples e Fácil de Usar',
+    title: 'Planilha de Controle de Gastos Mensais para Solteiros: Simples e Fácil de Usar',
     description: 'Baixe gratuitamente nossa planilha de controle de gastos mensais, projetada para organizar suas despesas básicas de forma simples e prática. Ideal para quem busca acompanhar as finanças com facilidade e sem coisas complicadas ou díficeis de entender.',
     dateRef: `2024-11-09`,
     image: { src: '/images/planilha-gastos-mensais.webp', alt: 'Finance Tips Image' },
     enable: true,
     category: 'download',
     downloadUrl: 'https://docs.google.com/spreadsheets/d/1L54b0VkEAUKiMvHtK1EcZ5rsn7eEBY_R/edit?usp=sharing&ouid=115491023356602678566&rtpof=true&sd=true'
+  },
+  {
+    link: 'material-de-apoio/planilha/gastos-mensais',
+    title: 'Planilha de Orçamento Familiar Gratuita: Diga Adeus ao Caos Financeiro',
+    description: 'Assuma o controle do seu orçamento familiar com uma planilha prática e completa. Monitore receitas, despesas e alcance suas metas financeiras com facilidade. É grátis, baixe agora!',
+    dateRef: `2024-12-20`,
+    image: { src: '/images/planilha-gastos-mensais-familiar.webp', alt: 'Finance Tips Image' },
+    enable: true,
+    category: 'download',
+    downloadUrl: 'https://docs.google.com/spreadsheets/d/1z-T-5WRzMeUtTnNwflftRAnwasV0DCn4/edit?usp=sharing&ouid=115491023356602678566&rtpof=true&sd=true'
   },
 ];
