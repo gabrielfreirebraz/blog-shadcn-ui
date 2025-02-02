@@ -22,7 +22,7 @@ const Page = async ({
       <div className="container mx-auto px-5 mb-10">
         <AdsSlot id="INTERNA-TOPO" fixed={adBannerHasFixed} />
 
-        {adBannerHasFixed && <><br /><br /><br /><br /></>}
+        {adBannerHasFixed && <div className="mb-40"></div>}
 
         <Header />
         <BlogPostsPreview posts={result.posts} />
