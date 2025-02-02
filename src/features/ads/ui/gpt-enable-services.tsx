@@ -2,16 +2,33 @@
 
 import { useEffect } from 'react';
 
+import { usePathname } from 'next/navigation';
 
-import { useAdSlotStore } from '../store/google-store';
-import { Banner, Googletag, Slot, TSlotMap, TTargeting } from '@/features/ads/types';
 import { GPTAdsConstants, TGPTAdsConstantsKeys } from '../consts';
+import { Banner, Googletag, Slot, TSlotMap, TTargeting } from '../types';
+import { useAdSlotStore } from '../store/google-store';
 
 export const GPTEnableServices = ({ targeting }: TTargeting) => {
-  const { googletagLoaded, banners } = useAdSlotStore();
+  const { googletagLoaded, banners, firstPageLoaded, setFirstPageLoaded } = useAdSlotStore();
+
+  const pathname = usePathname();
+  const slug = pathname?.split('/').pop();
 
   useEffect(() => {
-    googletagLoaded && AdManagerServices({ banners, targeting }).enable();
+    firstPageLoaded === false &&
+      googletagLoaded &&
+      AdManagerServices({ banners, targeting }).enable({ refresh: true });
+  }, [slug]);
+
+  useEffect(() => {
+    firstPageLoaded === true &&
+      googletagLoaded &&
+      AdManagerServices({ banners, targeting }).enable({
+        refresh: false,
+        callback: () => {
+          setFirstPageLoaded(false);
+        },
+      });
   }, [googletagLoaded]);
 
   return <></>;
@@ -26,30 +43,48 @@ const AdManagerServices = ({
 }) => {
   const { googletag } = window as unknown as { googletag: Googletag };
 
-  const enable = () => {
+  const enable = (
+    { refresh, callback }: { refresh: boolean; callback?: () => void } = { refresh: false }
+  ) => {
     googletag.cmd.push(() => {
-      // loop define slots
-      banners.map((banner: Banner) => {
-        createAdSlot(banner.id);
+      const allSlots = googletag.pubads().getSlots();
+
+      if (refresh) {
+        googletag.pubads().clearTargeting();
+      }
+
+      banners.forEach((banner: Banner) => {
+        const slotAlreadyDefined = allSlots.some(
+          (slot: any) => slot.getSlotElementId() === banner.divName
+        );
+
+        if (!slotAlreadyDefined) {
+          createAdSlot(banner.id);
+        }
       });
 
-      // set campaign skus
-      !!targeting && setAdTargeting({ targeting });
+      if (targeting?.key && targeting.skus) {
+        googletag.pubads().setTargeting(targeting?.key, targeting.skus);
+      }
 
-      // enable services ads
-      googletag.pubads().enableSingleRequest();
-      googletag.enableServices();
-    });
+      if (!refresh) {
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
 
-    googletag.cmd.push(() => {
-      // loop to display banners
-      banners.map((banner: Banner) => {
-        googletag.display(`${banner.divName}`);
-      });
+        banners.forEach((banner: Banner) => {
+          googletag.display(`${banner.divName}`);
+        });
+      } else {
+        setTimeout(() => {
+          googletag.pubads().refresh();
+        }, 1500);
+      }
+
+      callback && callback();
     });
   };
 
-  const createAdSlot = (idBanner: TGPTAdsConstantsKeys) => {
+  const createAdSlot = (idBanner: TGPTAdsConstantsKeys): Slot | null => {
     const ad = GPTAdsConstants[idBanner];
     const mapping = ad.mapping;
     const sizes = ad.sizes;
@@ -59,15 +94,10 @@ const AdManagerServices = ({
       sizes as [number, number] | [number, number][],
       `div-gpt-ad-${idBanner.toLowerCase()}`
     );
+
     slot && setupResponsiveAdSlot(slot, mapping);
-  };
 
-  const setAdTargeting = ({ targeting }: TTargeting) => {
-    if (!targeting || !targeting.key || !targeting.skus) return;
-
-    if (targeting.key !== '' && targeting.skus.length > 0) {
-      googletag.pubads().setTargeting(targeting.key, targeting.skus);
-    }
+    return slot;
   };
 
   const setupResponsiveAdSlot = (slot: Slot, mapping: TSlotMap) => {
@@ -80,7 +110,7 @@ const AdManagerServices = ({
       }
     }
 
-    slot && slot.defineSizeMapping(adMapping.build()).addService(googletag.pubads());
+    slot.defineSizeMapping(adMapping.build()).addService(googletag.pubads());
   };
 
   return { enable };

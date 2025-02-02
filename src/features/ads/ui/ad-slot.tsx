@@ -1,15 +1,15 @@
 'use client';
 
-import { useAdManager } from '@/features/ads/hooks';
 import React from 'react';
-import { GPTAdsConstants, TGPTAdsConstantsKeys } from '../consts';
 
+import { GPTAdsConstants, TGPTAdsConstantsKeys } from '../consts';
+import { useAdManager } from '../hooks';
 
 type TAdsSlotProps = {
   id: TGPTAdsConstantsKeys;
 };
 
-export function AdsSlot({ id }: TAdsSlotProps) {
+export function AdsSlot({ id }: Readonly<TAdsSlotProps>) {
   const ad = GPTAdsConstants[id];
 
   useAdManager({

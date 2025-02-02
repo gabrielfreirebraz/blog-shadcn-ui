@@ -9,7 +9,7 @@ export type TSlotMap = Record<number, Array<number> | Array<number[]>>;
 export type TUseGPTAdSlotProps = {
   id: TGPTAdsConstantsKeys;
   slotsLimit?: number;
-  bannerCofig?: any;
+  bannerLoadedInPage?: { banners: Banner[]; setBanner: (banner: Banner) => void };
 };
 
 export interface Banner {
@@ -26,6 +26,7 @@ export interface Googletag {
   sizeMapping: () => SizeMappingBuilder;
   defineSlot: (adUnitPath: string, size: GeneralSize, div: string) => Slot | null;
   enableServices: () => void;
+  enableSingleRequest: () => void;
   display: (divOrSlot: string | Slot) => void;
   destroySlots: (slots?: Slot[]) => boolean;
 }
@@ -40,6 +41,9 @@ interface PubAdsService {
   enableSingleRequest: () => void;
   setTargeting: (key: string, value: string | string[]) => void;
   addEventListener: (eventType: string, listener: (event: Event) => void) => void;
+  refresh: (slots?: Array<Slot>, options?: { changeCorrelator?: boolean }) => void;
+  getSlots: () => Array<Slot>;
+  clearTargeting: (key?: string) => void;
   [key: string]: any;
 }
 
