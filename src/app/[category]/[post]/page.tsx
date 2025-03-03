@@ -16,6 +16,7 @@ import Script from "next/script";
 import AuthWrapper from "@/components/AuthWrapper";
 
 import TimeTracker from "@/components/TimeTracker";
+import { AdsSlot } from "@/features/ads/ui/ad-slot";
 
 export const revalidate = 604800; // 7 days to revalidate as ISR (NO SSR)
 
@@ -35,16 +36,16 @@ export async function generateMetadata({
   const { title, description, image, metadata } = result.post as GetPostResultWithMetadata['post'];
   const generatedOgImage = signOgImageUrl({ title, brand: config.blog.name });
   const canonical = `${config.baseUrl}/${categorySlug}/${postSlug}`;
-  
+
   return {
     title,
     description,
     alternates: {
-      canonical: canonical, 
+      canonical: canonical,
     },
     robots: {
-      index: true, 
-      follow: true, 
+      index: true,
+      follow: true,
     },
     openGraph: {
       title,
@@ -61,7 +62,7 @@ interface Params {
 const Page = async ({ params: { post: slug, category: categorySlug } }: { params: Params }) => {
   const result = await wisp.getPost(slug);
   const { posts } = await wisp.getRelatedPosts({ slug, limit: 3 });
-  
+
   // ***getRelatedPosts doesn't bring us the tags!!!!***
   const relatedPosts: GetPostResult["post"][] = await Promise.all(
     posts.map(async (post) => {
@@ -72,9 +73,9 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
   if (!result || !result.post) {
     return notFound();
   }
-  
+
   const { title, publishedAt, updatedAt, image, author, metadata } = result.post as GetPostResultWithMetadata['post'];
-  
+
   const jsonLd: WithContext<BlogPosting> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -88,10 +89,12 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
       image: metadata?.authorImage ?? (author.image ?? undefined),
     },
   };
-  
+
   return (
-    <>      
+    <>
       <div className="container mx-auto px-5">
+        <AdsSlot id="INTERNA-TOPO" fixed={true} />
+
         <Header />
         <BlogPostContent post={result.post} />
         <RelatedPosts posts={relatedPosts} />

@@ -15,14 +15,10 @@ const Page = async ({
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
   const result = await wisp.getPosts({ limit: 6, page });
 
-  const adBannerHasFixed = false;
-
   return (
     <>
       <div className="container mx-auto px-5 mb-10">
-        <AdsSlot id="INTERNA-TOPO" fixed={adBannerHasFixed} />
-
-        {adBannerHasFixed && <div className="mb-40"></div>}
+        <AdsSlot id="INTERNA-TOPO" fixed={false} />
 
         <Header />
         <BlogPostsPreview posts={result.posts} />
