@@ -40,7 +40,7 @@ export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
               maxWidth: '100vw',
             }}
           >
-            <Link href="https://go.hotmart.com/T97366159Q" rel="nofollow" target='_blank'>
+            <Link href="/api/affiliate/ebook-alocacao-de-ativos" rel="nofollow" target='_blank'>
               <Image src="https://hcinvestimentos.com/wp-content/uploads/2012/03/banner728x90.gif"
                 width="728"
                 height="90"
