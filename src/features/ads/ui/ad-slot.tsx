@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { GPTAdsConstants, TGPTAdsConstantsKeys } from '../consts';
 import { useAdManager } from '../hooks';
@@ -15,16 +15,39 @@ type TAdsSlotProps = {
   fixed?: boolean;
 };
 
-export function AdsSlot({ id, fixed }: Readonly<TAdsSlotProps>) {
+export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
   const ad = GPTAdsConstants[id];
+  const [isFixed, setIsFixed] = useState(false);
+  const [bannerClose, setBannerClose] = useState(false);
+  const isFixedRef = useRef(false);
+
+  const handleScroll = useCallback(() => {
+    if (!fixed) return;
+
+    requestAnimationFrame(() => {
+      const shouldBeFixed = window.scrollY > 250;
+
+      if (isFixedRef.current !== shouldBeFixed) {
+        isFixedRef.current = shouldBeFixed;
+        setIsFixed(shouldBeFixed);
+      }
+    });
+  }, [fixed]);
+
+  useEffect(() => {
+    if (!fixed) return;
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [fixed, handleScroll]);
 
   useAdManager({
     id,
   });
 
-  return (
+  return !bannerClose && (
     <>
-      <div className={`${fixed && 'fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-white w-full border-gray-100 border-b-2 shadow-md shadow-gray-50'}`}>
+      <div className={`${isFixed && 'fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-white w-full border-gray-100 border-b-2 shadow-md shadow-gray-50'}`}>
         <div className='flex flex-col items-center mt-1 md:mt-0 md:items-center'>
           <span className='font-primary font-bold text-[6px] uppercase mt-4 text-[#9E9E9E]'>
             publicidade
@@ -41,14 +64,26 @@ export function AdsSlot({ id, fixed }: Readonly<TAdsSlotProps>) {
             }}
           >
             <Link href="https://go.hotmart.com/T97366159Q" rel="nofollow" target='_blank'>
-              <Image src="https://hcinvestimentos.com/wp-content/uploads/2012/03/banner728x90.gif" width="728" height="90" alt="Top banner" />
+              <Image src="https://hcinvestimentos.com/wp-content/uploads/2012/03/banner728x90.gif"
+                width="728"
+                height="90"
+                alt="Top banner"
+                priority={true}
+              />
             </Link>
           </div>
         </div>
 
-        {fixed && <FaChevronUp className='z-10 ml-0 -mb-7 mt-1 text-2xl font-bold border-gray-100 border-2 border-t-0 py-1 px-4 h-7 w-20 bg-white rounded-b-[7px] shadow-md shadow-gray-120' />}
+        {isFixed &&
+          <>
+            <FaChevronUp
+              className='cursor-pointer z-10 ml-0 -mb-7 mt-1 text-2xl font-bold border-gray-100 border-2 border-t-0 py-1 px-4 h-7 w-20 bg-white rounded-b-[7px] shadow-md shadow-gray-120 hover:bg-gray-100'
+              onClick={() => setBannerClose(true)}
+            />
+          </>
+        }
       </div>
-      {fixed && <div className="mb-40"></div>}
+      {isFixed && <div className="mb-40"></div>}
     </>
   );
 }
