@@ -25,5 +25,5 @@ export const useScrollAdBanner = (fixed: boolean) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [fixed, handleScroll]);
 
-  return { isScrolledFixed }
+  return [ isScrolledFixed ]
 }

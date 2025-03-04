@@ -18,7 +18,7 @@ type TAdsSlotProps = {
 export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
   const ad = GPTAdsConstants[id];
   const [bannerClose, setBannerClose] = useState(false);
-  const { isScrolledFixed } = useScrollAdBanner(fixed)
+  const [isScrolledFixed] = useScrollAdBanner(fixed);
 
   useAdManager({ id });
 

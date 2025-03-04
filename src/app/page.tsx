@@ -18,7 +18,7 @@ const Page = async ({
   return (
     <>
       <div className="container mx-auto px-5 mb-10">
-        <AdsSlot id="INTERNA-TOPO" fixed={false} />
+        <AdsSlot id="INTERNA-TOPO" />
 
         <Header />
         <BlogPostsPreview posts={result.posts} />
