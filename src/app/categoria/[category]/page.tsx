@@ -4,6 +4,7 @@ import { BlogPostsPagination } from "@/components/BlogPostsPagination";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { config } from "@/config";
+import { AdsSlot } from "@/features/ads/ui/ad-slot";
 import { wisp } from "@/lib/wisp";
 
 export async function generateMetadata({
@@ -19,13 +20,13 @@ export async function generateMetadata({
 
   return {
     title: currentCategoryItem.meta.title,
-    description: currentCategoryItem.meta.description,      
+    description: currentCategoryItem.meta.description,
     alternates: {
-      canonical: `${config.baseUrl}/categoria/${currentCategoryItem.slug}`, 
+      canonical: `${config.baseUrl}/categoria/${currentCategoryItem.slug}`,
     },
     robots: {
-      index: true, 
-      follow: true, 
+      index: true,
+      follow: true,
     },
   };
 }
@@ -41,12 +42,15 @@ const Page = async ({
   searchParams: { [key: string]: string | string[] | undefined };
   params: { category: string }
 }) => {
-  
+
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
   const result = await wisp.getPosts({ limit: 6, page, tags: [params.category] });
 
   return (
     <div className="container mx-auto px-5 mb-10">
+      <AdsSlot id="INTERNA-TOPO" className="hidden md:block" />
+      <AdsSlot id="MOBILE" className="block md:hidden" />
+
       <Header />
       <BlogPostsPreview posts={result.posts} categorySlug={params.category} />
       <BlogPostsPagination pagination={result.pagination} basePath={`/categoria/${params.category}?page=`} />

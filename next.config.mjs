@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "imagedelivery.net",
       },
+      {
+        protocol: 'https',
+        hostname: 'hcinvestimentos.com',
+      },
     ],
   },
   redirects: async () => {
@@ -15,11 +19,11 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/api/auth/(.*)', 
+        source: '/api/auth/(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store, must-revalidate', 
+            value: 'no-store, must-revalidate',
           },
         ],
       },
