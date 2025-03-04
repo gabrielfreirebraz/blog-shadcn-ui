@@ -48,7 +48,8 @@ const Page = async ({
 
   return (
     <div className="container mx-auto px-5 mb-10">
-      <AdsSlot id="INTERNA-TOPO" />
+      <AdsSlot id="INTERNA-TOPO" className="hidden md:block" />
+      <AdsSlot id="MOBILE" className="block md:hidden" />
 
       <Header />
       <BlogPostsPreview posts={result.posts} categorySlug={params.category} />

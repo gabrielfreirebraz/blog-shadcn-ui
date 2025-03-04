@@ -13,9 +13,10 @@ import { useScrollAdBanner } from '../hooks/use-scroll';
 type TAdsSlotProps = {
   id: TGPTAdsConstantsKeys;
   fixed?: boolean;
+  className?: string;
 };
 
-export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
+export function AdsSlot({ id, fixed = false, className }: Readonly<TAdsSlotProps>) {
   const ad = GPTAdsConstants[id];
   const [bannerClose, setBannerClose] = useState(false);
   const [isScrolledFixed] = useScrollAdBanner(fixed);
@@ -23,7 +24,7 @@ export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
   useAdManager({ id });
 
   return !bannerClose && (
-    <>
+    <div className={`${className && className}`}>
       <div className={`${isScrolledFixed && 'fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-white w-full border-gray-100 border-b-2 shadow-md shadow-gray-50'}`}>
         <div className='flex flex-col items-center mt-1 md:mt-0 md:items-center'>
           <span className='font-primary font-bold text-[6px] uppercase mt-4 text-[#9E9E9E]'>
@@ -41,9 +42,10 @@ export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
             }}
           >
             <Link href="/api/affiliate/ebook-alocacao-de-ativos" rel="nofollow" target='_blank'>
-              <Image src="https://hcinvestimentos.com/wp-content/uploads/2012/03/banner728x90.gif"
-                width="728"
-                height="90"
+              <Image
+                width={ad.sizes[0]}
+                height={ad.sizes[1]}
+                src={ad.src}
                 alt="Top banner"
                 priority={true}
               />
@@ -61,6 +63,6 @@ export function AdsSlot({ id, fixed = false }: Readonly<TAdsSlotProps>) {
         }
       </div>
       {isScrolledFixed && <div className="mb-40"></div>}
-    </>
+    </div>
   );
 }

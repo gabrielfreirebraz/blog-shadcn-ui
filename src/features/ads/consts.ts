@@ -5,6 +5,7 @@ export const GPTAdsConstants = {
       0: [0, 0],
       769: [728, 90],
     },
+    src: 'https://hcinvestimentos.com/wp-content/uploads/2012/03/banner728x90.gif',
   },
   'INTERNA-LATERAL': {
     sizes: [300, 600],
@@ -12,12 +13,14 @@ export const GPTAdsConstants = {
       0: [0, 0],
       769: [300, 600],
     },
+    src: '',
   },
-  MOBILE: {
-    sizes: [300, 100],
+  'MOBILE': {
+    sizes: [336, 280],
     mapping: {
-      0: [300, 100],
+      0: [336, 280],
     },
+    src: 'https://hcinvestimentos.com/wp-content/uploads/2012/03/banner336x280.gif',
   },
 };
 

@@ -93,7 +93,8 @@ const Page = async ({ params: { post: slug, category: categorySlug } }: { params
   return (
     <>
       <div className="container mx-auto px-5">
-        <AdsSlot id="INTERNA-TOPO" fixed={true} />
+        <AdsSlot id="INTERNA-TOPO" className="hidden md:block" fixed />
+        <AdsSlot id="MOBILE" className="block md:hidden" fixed />
 
         <Header />
         <BlogPostContent post={result.post} />
