@@ -27,8 +27,12 @@ const Page = async ({
         <Footer />
       </div>
 
+      {/* 
+      Should be enable for all adbanner pages when Adsense works fine
+
       <GPTScript />
-      <GPTEnableServices />
+      <GPTEnableServices /> 
+      */}
     </>
   );
 };
