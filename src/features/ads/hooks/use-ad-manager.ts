@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { GPTAdsConstants } from './consts';
-import { TUseGPTAdSlotProps } from './types';
-import { useAdSlotStore } from './store/google-store';
+import { GPTAdsConstants } from '../consts';
+import { TUseGPTAdSlotProps } from '../types';
+import { useAdSlotStore } from '../store/google-store';
 
 const AdManager = ({ id, bannerLoadedInPage }: TUseGPTAdSlotProps) => {
   const initBanner = () => {
