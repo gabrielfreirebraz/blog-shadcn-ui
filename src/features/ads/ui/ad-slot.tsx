@@ -9,7 +9,7 @@ import { FaChevronUp } from "react-icons/fa6";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useScrollAdBanner } from '../hooks/use-scroll';
-import { AFFILIATE_LINKS } from '@/utils/affiliateLinks';
+import { AffiliateData, AFFILIATES, AFFILIATES_KEY_NAME } from '@/utils/affiliateLinks';
 
 type TAdsSlotProps = {
   id: TGPTAdsConstantsKeys;
@@ -19,13 +19,23 @@ type TAdsSlotProps = {
 
 export function AdsSlot({ id, fixed = false, className }: Readonly<TAdsSlotProps>) {
   const ad = GPTAdsConstants[id];
-  const affiliateKeys = Object.keys(AFFILIATE_LINKS);
-  const affiliateIdEbookHC = affiliateKeys[0];
+  const affiliateMap = AFFILIATES[AFFILIATES_KEY_NAME.EBOOK_ASSET_ALLOCATION];
 
   const [bannerClose, setBannerClose] = useState(false);
   const [isScrolledFixed] = useScrollAdBanner(fixed);
 
   useAdManager({ id });
+
+   const trackAffiliateClick = (affiliate: AffiliateData) => {
+    if (window.gtag) {
+      window.gtag('event', 'click', {
+        event_category: 'Affiliate',
+        event_label: affiliate.slug,
+        value: affiliate.price,
+        currency: 'BRL', 
+      });
+    }
+  };
 
   return !bannerClose && (
     <div className={`${className && className}`}>
@@ -45,12 +55,18 @@ export function AdsSlot({ id, fixed = false, className }: Readonly<TAdsSlotProps
               maxWidth: '100vw',
             }}
           >
-            <Link href={`/afiliado/${affiliateIdEbookHC}`} rel="nofollow" target='_blank' prefetch={false}>
+            <Link 
+              href={`/afiliado/${affiliateMap.slug}`} 
+              rel="nofollow" 
+              target='_blank' 
+              prefetch={false}
+              onClick={() => trackAffiliateClick(affiliateMap)}>
+
               <Image
                 width={ad.sizes[0]}
                 height={ad.sizes[1]}
-                src={ad.src}
-                alt="Top banner"
+                src={id === "INTERNA-TOPO" ? affiliateMap.src.header : affiliateMap.src.mobile}
+                alt={`${affiliateMap.name}`}
                 priority={true}
               />
             </Link>
