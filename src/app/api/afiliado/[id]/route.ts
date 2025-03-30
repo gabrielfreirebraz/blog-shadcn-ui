@@ -1,10 +1,10 @@
+import { AFFILIATE_LINKS } from "@/utils/affiliateLinks";
 import { NextResponse } from "next/server";
 
-const AFFILIATE_LINKS: Record<string, string> = {
-  "ebook-alocacao-de-ativos": "https://go.hotmart.com/T97366159Q",  
-};
-
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
   const affiliateUrl = AFFILIATE_LINKS[params.id];
 
   if (!affiliateUrl) {

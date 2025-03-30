@@ -9,6 +9,7 @@ import { FaChevronUp } from "react-icons/fa6";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useScrollAdBanner } from '../hooks/use-scroll';
+import { AFFILIATE_LINKS } from '@/utils/affiliateLinks';
 
 type TAdsSlotProps = {
   id: TGPTAdsConstantsKeys;
@@ -18,6 +19,9 @@ type TAdsSlotProps = {
 
 export function AdsSlot({ id, fixed = false, className }: Readonly<TAdsSlotProps>) {
   const ad = GPTAdsConstants[id];
+  const affiliateKeys = Object.keys(AFFILIATE_LINKS);
+  const affiliateIdEbookHC = affiliateKeys[0];
+
   const [bannerClose, setBannerClose] = useState(false);
   const [isScrolledFixed] = useScrollAdBanner(fixed);
 
@@ -41,7 +45,7 @@ export function AdsSlot({ id, fixed = false, className }: Readonly<TAdsSlotProps
               maxWidth: '100vw',
             }}
           >
-            <Link href="/api/afiliado/ebook-alocacao-de-ativos" rel="nofollow" target='_blank' prefetch={false}>
+            <Link href={`/api/afiliado/${affiliateIdEbookHC}`} rel="nofollow" target='_blank' prefetch={false}>
               <Image
                 width={ad.sizes[0]}
                 height={ad.sizes[1]}
