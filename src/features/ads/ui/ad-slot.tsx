@@ -45,7 +45,7 @@ export function AdsSlot({ id, fixed = false, className }: Readonly<TAdsSlotProps
               maxWidth: '100vw',
             }}
           >
-            <Link href={`/api/afiliado/${affiliateIdEbookHC}`} rel="nofollow" target='_blank' prefetch={false}>
+            <Link href={`/afiliado/${affiliateIdEbookHC}`} rel="nofollow" target='_blank' prefetch={false}>
               <Image
                 width={ad.sizes[0]}
                 height={ad.sizes[1]}

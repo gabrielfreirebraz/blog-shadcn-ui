@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   if (!!params.id) {
-    const newUrl = new URL(`/api/afiliado/${params.id}`, config.baseUrl);
+    const newUrl = new URL(`/afiliado/${params.id}`, config.baseUrl);
     const response = NextResponse.redirect(newUrl.toString(), 301);
     response.headers.set("x-robots-tag", "noindex, nofollow");
 
