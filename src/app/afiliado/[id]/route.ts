@@ -1,11 +1,11 @@
-import { AFFILIATE_LINKS } from "@/utils/affiliateLinks";
+import { AFFILIATES } from "@/utils/affiliateLinks";
 import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  const affiliateUrl = AFFILIATE_LINKS[params.id];
+  const affiliateUrl = AFFILIATES[params.id]?.link;
 
   if (!affiliateUrl) {
     return NextResponse.json({ error: "Affiliate not found" }, { status: 404 });
