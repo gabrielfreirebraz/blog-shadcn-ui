@@ -19,6 +19,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@types/sanitize-html": "^2.11.0",
     "@wisp-cms/client": "^0.0.16",
+    "@wisp-cms/react-custom-component": "^0.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
