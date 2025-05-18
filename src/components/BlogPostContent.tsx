@@ -1,7 +1,10 @@
 "use client";
 import { GetPostResult } from "@/lib/wisp";
+import { ContentWithCustomComponents } from "@wisp-cms/react-custom-component";
+
 import Link from "next/link";
 import sanitize, { defaults } from "sanitize-html";
+import { LeadCaptureForm } from "./LeadCaptureForm";
 
 export const PostContent = ({ content }: { content: string }) => {
   const sanitizedContent = sanitize(content, {
@@ -44,8 +47,15 @@ export const PostContent = ({ content }: { content: string }) => {
   return (
     <div
       className="blog-content mx-auto"
-      dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-    ></div>
+      // dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+    >
+      <div className="prose prose-lg container max-w-6xl pb-24">
+        <ContentWithCustomComponents
+          content={content}
+          customComponents={{ LeadCaptureForm }}
+        />        
+      </div>
+    </div>
   );
 };
 

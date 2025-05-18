@@ -10,12 +10,24 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'hcinvestimentos.com',
       },
+      {
+        protocol: "https",
+        hostname: "lh7-rt.googleusercontent.com", 
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // if there are others images from Google
+      },
+      {
+        protocol: "https",
+        hostname: "lh4.googleusercontent.com", // extra security
+      },
     ],
   },
   redirects: async () => {
     return [];
   },
-  // remove cache da cloudflare para sessao de usuário
+  // remove cache from cloudflare for user session
   async headers() {
     return [
       {
