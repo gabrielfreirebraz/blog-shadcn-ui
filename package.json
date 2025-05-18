@@ -36,6 +36,7 @@
     "react-responsive": "^10.0.0",
     "rss": "^1.2.2",
     "sanitize-html": "^2.13.0",
+    "style-to-js": "^1.1.16",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.0.2",
