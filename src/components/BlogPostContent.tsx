@@ -53,7 +53,7 @@ export const PostContent = ({ content }: { content: string }) => {
         <ContentWithCustomComponents
           content={content}
           customComponents={{ LeadCaptureForm }}
-        />
+        />        
       </div>
     </div>
   );
