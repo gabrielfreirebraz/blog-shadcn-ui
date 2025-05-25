@@ -1,7 +1,5 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { config } from "@/config";
-import { signOgImageUrl } from "@/lib/og-image";
 import Markdown from "react-markdown";
 
 
@@ -10,7 +8,7 @@ const content = `# Contato
 
 Fale com a gente através do e-mail:
 
-[contato@bolsoextra.com.br](mailto:contato@bolsoextra.com.br)
+[bolsoextra.corp@gmail.com](bolsoextra.corp@gmail.com)
 `
 
 export async function generateMetadata() {
