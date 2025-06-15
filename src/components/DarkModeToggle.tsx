@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-export const DarkModeToggle = () => {
+export const DarkModeToggle = ({ darkModeEnabled = false }: { darkModeEnabled?: boolean }) => {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -18,6 +18,11 @@ export const DarkModeToggle = () => {
 
   // Render nothing on the server
   if (!mounted) return null;
+
+  if (!darkModeEnabled) { 
+    setTheme("light");
+    return null; 
+  }
 
   // Once the component has mounted, we can safely render
   return (
